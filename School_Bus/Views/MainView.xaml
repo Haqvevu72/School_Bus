@@ -25,6 +25,18 @@
         <DataTemplate DataType="{x:Type viewModel:ParentViewModel}">
             <local:ParentChildView/>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+            <local:StudentView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ClassViewModel}">
+            <local:ClassView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:RidesViewModel}">
+            <local:RidesView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border CornerRadius="10"                    
@@ -85,7 +97,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         >
+         Command="{Binding ShowRidesCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="MapLocation" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Rides" Style="{StaticResource menuButtonText}"/>
@@ -95,7 +107,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         >
+         Command="{Binding ShowClassCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="School" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Class" Style="{StaticResource menuButtonText}"/>
@@ -105,7 +117,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         >
+         Command="{Binding ShowStudentCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Child" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Student" Style="{StaticResource menuButtonText}"/>

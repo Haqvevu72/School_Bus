@@ -48,6 +48,10 @@ namespace School_Bus.ViewModels
 
         public ICommand ShowParentViewCommand { get;}
         public ICommand ShowCreateRideCommand { get;} 
+        public ICommand ShowStudentCommand    { get;} 
+        public ICommand ShowClassCommand      { get;}
+        public ICommand ShowRidesCommand      { get;}
+
 
         // --> Constructor
 
@@ -56,7 +60,9 @@ namespace School_Bus.ViewModels
             // --> Initialize Commands
             ShowParentViewCommand = new ViewModelCommand(ExecuteShowParentViewCommand);
             ShowCreateRideCommand = new ViewModelCommand(ExecuteShowCreateRideViewCommand);
-
+            ShowStudentCommand = new ViewModelCommand(ExecuteShowStudentViewCommand);
+            ShowClassCommand = new ViewModelCommand(ExecuteShowClassViewCommand);
+            ShowRidesCommand = new ViewModelCommand(ExecuteShowRidesViewCommand);
             // * Default View
             ExecuteShowCreateRideViewCommand(null);
 
@@ -76,6 +82,27 @@ namespace School_Bus.ViewModels
             CurrentChildView = new CreateRideViewModel();
             Caption = "Create Ride";
             Icon = IconChar.Road;
+        }
+        
+        public void ExecuteShowStudentViewCommand(object? parameter)
+        {
+            CurrentChildView = new StudentViewModel();
+            Caption = "Student";
+            Icon = IconChar.Child;
+        }
+
+        public void ExecuteShowClassViewCommand(object? parameter) 
+        {
+            CurrentChildView = new ClassViewModel();
+            Caption = "Class";
+            Icon = IconChar.School;
+        }
+
+        public void ExecuteShowRidesViewCommand(object? parameter)
+        {
+            CurrentChildView = new RidesViewModel();
+            Caption = "Rides";
+            Icon = IconChar.MapLocation;
         }
     }
 }
