@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:local="clr-namespace:School_Bus.Views"
+        xmlns:local="clr-namespace:School_Bus.Views" xmlns:viewModel="clr-namespace:School_Bus.ViewModels"
         mc:Ignorable="d"
         Title="MainView" Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
@@ -13,6 +13,20 @@
         AllowsTransparency="True"
         >
 
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:CreateRideViewModel}">
+            <local:CreateRideView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ParentViewModel}">
+            <local:ParentChildView/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Border CornerRadius="10"                    
         BorderThickness="1">
         <Border.BorderBrush>
@@ -48,7 +62,7 @@
                             Height="35"
                             Margin="15,25,0,40">
 
-                        <Image Source="/Images/Logo.png" Height="30"/>
+                        <Image Source="\Images\Logo.png" Height="30"/>
                         <TextBlock Text="Shool Bus"
                                Foreground="{StaticResource titleColor2}"
                                FontSize="20"
@@ -61,7 +75,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color1}"
                              IsChecked="True"
-                             Command="{Binding ShowHomeViewCommand}">
+                             Command="{Binding ShowCreateRideCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Road" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Create Rde" Style="{StaticResource menuButtonText}"/>
@@ -71,7 +85,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="MapLocation" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Rides" Style="{StaticResource menuButtonText}"/>
@@ -81,7 +95,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="School" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Class" Style="{StaticResource menuButtonText}"/>
@@ -91,7 +105,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Child" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Student" Style="{StaticResource menuButtonText}"/>
@@ -101,7 +115,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         Command="{Binding ShowParentViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="PeopleGroup" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Parent" Style="{StaticResource menuButtonText}"/>
@@ -111,7 +125,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="DriversLicense" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Driver" Style="{StaticResource menuButtonText}"/>
@@ -121,7 +135,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Bus" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Car" Style="{StaticResource menuButtonText}"/>
@@ -131,7 +145,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
          Tag="{StaticResource color1}"
          IsChecked="False"
-         Command="{Binding ShowHomeViewCommand}">
+         >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BirthdayCake" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Holidays" Style="{StaticResource menuButtonText}"/>
@@ -205,13 +219,13 @@
                         <StackPanel Grid.Column="0"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center">
-                            <fa:IconImage Icon="Road"
+                            <fa:IconImage Icon="{Binding Icon}"
                                       Height="20"
                                       Width="20"
                                       Foreground="{StaticResource titleColor2}"
                                       Margin="35,0,10,0"/>
 
-                            <TextBlock Text="Create Rides"
+                            <TextBlock Text="{Binding Caption}"
                                    Foreground="{StaticResource titleColor2}"
                                    FontSize="16"
                                    FontFamily="Montserrat"
@@ -220,7 +234,10 @@
                         </StackPanel>
                     </Grid>
 
-
+                    <!--Content section / Child views-->
+                    <ContentControl Content="{Binding CurrentChildView}"
+                                    Grid.Row="2"
+                                    Margin="25"/>
 
 
                 </Grid>

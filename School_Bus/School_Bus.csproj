@@ -8,12 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\LayOut.jpg" />
+    <None Remove="Images\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Resource Include="Images\LayOut.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

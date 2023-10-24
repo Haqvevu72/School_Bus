@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace School_Bus.Views
 {
     /// <summary>
-    /// Interaction logic for ParentView.xaml
+    /// Interaction logic for ParentChildView.xaml
     /// </summary>
-    public partial class ParentView : UserControl
+    public partial class ParentChildView : UserControl
     {
-        public ParentView()
+        public ParentChildView()
         {
             InitializeComponent();
         }
