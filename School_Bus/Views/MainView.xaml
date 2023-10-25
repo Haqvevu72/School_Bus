@@ -87,7 +87,7 @@
                             Margin="15,25,0,40">
 
                         <Image Source="\Images\Logo.png" Height="30"/>
-                        <TextBlock Text="Shool Bus"
+                        <TextBlock Text="School Bus"
                                Foreground="{StaticResource titleColor2}"
                                FontSize="20"
                                FontFamily="Montserrat"
