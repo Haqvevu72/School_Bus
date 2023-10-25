@@ -122,6 +122,33 @@
         <Setter Property="Height" Value="16"/>
     </Style>
 
-
+    <!--ParentView Button-->
+    <Style x:Key="parentButton" TargetType="Button">
+        <Setter Property="FontSize" Value="12" ></Setter>
+        <Setter Property="FontFamily" Value="MontSerrat" ></Setter>
+        <Setter Property="Cursor" Value="Hand" ></Setter>
+        <Setter Property="BorderThickness" Value="0" ></Setter>
+        <Setter Property="Foreground" Value="Brown" ></Setter>
+        <Setter Property="VerticalAlignment" Value="Top" ></Setter>
+        <Setter Property="Margin" Value=" 0 0 10 0" ></Setter>
+        <Setter Property="Background" Value="Orange"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="30"
+                CornerRadius="15"
+                Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="SandyBrown"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

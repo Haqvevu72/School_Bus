@@ -51,7 +51,10 @@ namespace School_Bus.ViewModels
         public ICommand ShowStudentCommand    { get;} 
         public ICommand ShowClassCommand      { get;}
         public ICommand ShowRidesCommand      { get;}
-
+        public ICommand ShowDriverCommand { get; }
+        public ICommand ShowCarCommand { get; }
+        public ICommand ShowHolidaysCommand { get; }
+        
 
         // --> Constructor
 
@@ -63,6 +66,9 @@ namespace School_Bus.ViewModels
             ShowStudentCommand = new ViewModelCommand(ExecuteShowStudentViewCommand);
             ShowClassCommand = new ViewModelCommand(ExecuteShowClassViewCommand);
             ShowRidesCommand = new ViewModelCommand(ExecuteShowRidesViewCommand);
+            ShowDriverCommand = new ViewModelCommand(ExecuteShowDriverViewCommand);
+            ShowCarCommand = new ViewModelCommand(ExecuteShowCarViewCommand);
+            ShowHolidaysCommand = new ViewModelCommand(ExecuteShowHolidaysViewCommand);
             // * Default View
             ExecuteShowCreateRideViewCommand(null);
 
@@ -103,6 +109,27 @@ namespace School_Bus.ViewModels
             CurrentChildView = new RidesViewModel();
             Caption = "Rides";
             Icon = IconChar.MapLocation;
+        }
+
+        public void ExecuteShowDriverViewCommand(object? parameter) 
+        {
+            CurrentChildView = new DriverViewModel();
+            Caption = "Driver";
+            Icon = IconChar.DriversLicense;
+        }
+        
+        public void ExecuteShowCarViewCommand(object? parameter) 
+        {
+            CurrentChildView = new CarViewModel();
+            Caption = "Car";
+            Icon = IconChar.Bus;
+        }
+        
+        public void ExecuteShowHolidaysViewCommand(object? parameter) 
+        {
+            CurrentChildView = new HolidaysViewModel();
+            Caption = "Holidays";
+            Icon = IconChar.BirthdayCake;
         }
     }
 }

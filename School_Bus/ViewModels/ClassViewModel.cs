@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace School_Bus.ViewModels
 {
-    class ClassViewModel:BaseViewModel
+    public class ClassViewModel:BaseViewModel
     {
     }
 }

@@ -6,7 +6,55 @@
              xmlns:local="clr-namespace:School_Bus.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightSkyBlue">
+    <Grid Background="LightYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 60 0 0">
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">Bus ID</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">Driver ID</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">Start Point</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">End Point</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 60 0 0">
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">Passangers</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}">Finish Time</TextBlock>
+                <TextBox Width="200" Background="White" Margin="0 10 0 0"></TextBox>
+                <Button Grid.Row="0" 
+                        Grid.Column="1"
+                        Margin="0 20 0 0"
+                        Style="{StaticResource parentButton}" 
+                        VerticalAlignment="Center" 
+                        Width="100"
+                        Content="Add Ride">
+
+                </Button>
+            </StackPanel>
+
+        </StackPanel>
+         
     </Grid>
 </UserControl>

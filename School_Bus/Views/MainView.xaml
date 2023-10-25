@@ -37,6 +37,18 @@
         <DataTemplate DataType="{x:Type viewModel:RidesViewModel}">
             <local:RidesView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:DriverViewModel}">
+            <local:DriverView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CarViewModel}">
+            <local:CarView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HolidaysViewModel}">
+            <local:HolidaysView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border CornerRadius="10"                    
@@ -85,9 +97,9 @@
                     </StackPanel>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                             Tag="{StaticResource color1}"
-                             IsChecked="True"
-                             Command="{Binding ShowCreateRideCommand}">
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="True"
+                                 Command="{Binding ShowCreateRideCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Road" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Create Rde" Style="{StaticResource menuButtonText}"/>
@@ -95,9 +107,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         Command="{Binding ShowRidesCommand}">
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowRidesCommand}">  
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="MapLocation" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Rides" Style="{StaticResource menuButtonText}"/>
@@ -105,9 +117,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         Command="{Binding ShowClassCommand}">
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowClassCommand}">      
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="School" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Class" Style="{StaticResource menuButtonText}"/>
@@ -115,9 +127,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         Command="{Binding ShowStudentCommand}">
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowStudentCommand}">        
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Child" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Student" Style="{StaticResource menuButtonText}"/>
@@ -125,9 +137,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         Command="{Binding ShowParentViewCommand}">
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowParentViewCommand}">     
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="PeopleGroup" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Parent" Style="{StaticResource menuButtonText}"/>
@@ -135,9 +147,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         >
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowDriverCommand}">     
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="DriversLicense" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Driver" Style="{StaticResource menuButtonText}"/>
@@ -145,9 +157,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         >
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowCarCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Bus" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Car" Style="{StaticResource menuButtonText}"/>
@@ -155,9 +167,9 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-         Tag="{StaticResource color1}"
-         IsChecked="False"
-         >
+                                 Tag="{StaticResource color1}"
+                                 IsChecked="False"
+                                 Command="{Binding ShowHolidaysCommand}">       
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BirthdayCake" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Holidays" Style="{StaticResource menuButtonText}"/>
