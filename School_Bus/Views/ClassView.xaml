@@ -42,10 +42,12 @@
                 Command="{Binding LoginCommand}"
                 Style="{StaticResource parentButton}">      
         </Button>
-        <Button Grid.Column="2"
+        <Button Name="btn_AddClass"
+                Grid.Column="2"
                 Content="Add Class"
                 Command="{Binding LoginCommand}"
-                Style="{StaticResource parentButton}">
+                Style="{StaticResource parentButton}"
+               >
 
         </Button>
         <Button Grid.Column="3"

@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,20 @@ using System.Windows.Shapes;
 namespace School_Bus.Views
 {
     /// <summary>
-    /// Interaction logic for ClassView.xaml
+    /// Interaction logic for ClassAddView.xaml
     /// </summary>
-    public partial class ClassView : UserControl
+    public partial class ClassAddView : Page
     {
-        public ClassView()
+        public ClassAddView()
         {
             InitializeComponent();
         }
 
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        
     }
 }
