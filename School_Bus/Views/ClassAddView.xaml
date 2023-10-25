@@ -27,8 +27,13 @@
 
         <StackPanel Grid.Row="1">
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                       Text="Class Name"></TextBlock>
-            <TextBox Style="{StaticResource MaterialDesignTextBox}"></TextBox>
+                       Text="Class Name"
+                       Foreground="Brown"
+                       Margin="20 0 0 0"></TextBlock>
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Width="360"
+                     HorizontalAlignment="Left"
+                     Margin="20 0 0 0"></TextBox>
             <Button Style="{StaticResource parentButton}"
                     x:Name="btnAdd"
                     Width="100"
