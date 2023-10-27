@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using Context.Contexts;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,24 @@ namespace School_Bus.Views
         {
             base.OnMouseLeftButtonDown(e);
             DragMove();
+        }
+
+        private void btn_login_Click(object sender, RoutedEventArgs e)
+        {
+            SchoolBusDB SchoolBusDb = new SchoolBusDB();
+
+            var Admins = SchoolBusDb.Admins.ToList();
+
+            for (int i = 0; i < Admins.Count; i++)
+            {
+
+                if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password) 
+                { 
+                    MainView mainView = new MainView();
+                    Close();
+                    mainView.ShowDialog();
+                }
+            }
         }
     }
 }
