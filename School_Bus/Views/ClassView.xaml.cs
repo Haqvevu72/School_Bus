@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Window = System.Windows.Window;
 
 namespace School_Bus.Views
 {
@@ -20,6 +22,8 @@ namespace School_Bus.Views
     /// </summary>
     public partial class ClassView : UserControl
     {
+        public static Window inputWindow;
+        public static Window outputWindow;
         public ClassView()
         {
             InitializeComponent();
@@ -28,17 +32,17 @@ namespace School_Bus.Views
         private void btn_AddClass_Click(object sender, RoutedEventArgs e)
         {
             ClassAddView inputControl = new ClassAddView();
-            Window inputWindow = new Window
+            inputWindow = new Window()
             {
                 Content = inputControl,
                 Height = 300,
-                Width=400,
-               
-                
+                Width = 400,
+
+
                 WindowStyle = WindowStyle.None,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize
-                
+
             };
 
             inputControl.MouseDown += (sender, e) =>
@@ -50,6 +54,32 @@ namespace School_Bus.Views
             };
             inputWindow.ShowDialog();
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ClassRemoveView outputControl = new ClassRemoveView();
+            outputWindow= new Window
+            {
+                Content = outputControl,
+                Height = 400,
+                Width = 400,
+
+
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+
+            };
+
+            outputControl.MouseDown += (sender, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Left)
+                {
+                   outputWindow.DragMove();
+                }
+            };
+            outputWindow.ShowDialog();
         }
     }
 }

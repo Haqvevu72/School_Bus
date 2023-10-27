@@ -9,7 +9,7 @@
       d:DesignHeight="300" d:DesignWidth="400"
       Title="ClassAddView">
 
-    <Grid Background="Coral">
+    <Grid Background="#F9B572">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -29,15 +29,18 @@
         <StackPanel Grid.Row="1">
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                        Text="Class Name"
-                       Foreground="LightYellow"
-                       Margin="20 0 0 0"></TextBlock>
-            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="White"
+                       Foreground="Brown"
+                       Margin="20 0 0 0"
+                       FontWeight="Bold"></TextBlock>
+            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="Coral"
                      FontSize="18"
                      Width="360"
                      HorizontalAlignment="Left"
-                     Margin="20 0 0 0"></TextBox
+                     Margin="20 0 0 0"
+                     Background="LightYellow"
+                     FontWeight="Bold"></TextBox
                      >
-            <Button Style="{StaticResource parentButton}"
+            <Button 
                     x:Name="btnAdd"
                     Foreground="White"
                     Width="100"
