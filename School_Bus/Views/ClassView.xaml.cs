@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +25,31 @@ namespace School_Bus.Views
             InitializeComponent();
         }
 
+        private void btn_AddClass_Click(object sender, RoutedEventArgs e)
+        {
+            ClassAddView inputControl = new ClassAddView();
+            Window inputWindow = new Window
+            {
+                Content = inputControl,
+                Height = 300,
+                Width=400,
+               
+                
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+                
+            };
+
+            inputControl.MouseDown += (sender, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Left)
+                {
+                    inputWindow.DragMove();
+                }
+            };
+            inputWindow.ShowDialog();
+
+        }
     }
 }
