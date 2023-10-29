@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace School_Bus.Views
+namespace School_Bus.Views.Parent
 {
     /// <summary>
-    /// Interaction logic for ParentChildView.xaml
+    /// Interaction logic for ParentRemoveView.xaml
     /// </summary>
-    public partial class ParentChildView : UserControl
+    public partial class ParentRemoveView : UserControl
     {
-        public ParentChildView()
+        public ParentRemoveView()
         {
             InitializeComponent();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            ParentChildView.outputwindow.Close();
         }
     }
 }

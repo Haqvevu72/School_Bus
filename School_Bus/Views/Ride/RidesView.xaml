@@ -47,7 +47,8 @@
             <Button Grid.Column="3"
                     Content="Remove Ride"
                     Command="{Binding LoginCommand}"
-                    Style="{StaticResource parentButton}">
+                    Style="{StaticResource parentButton}"
+                    Click="Button_Click">
             </Button>
 
         </Grid>
