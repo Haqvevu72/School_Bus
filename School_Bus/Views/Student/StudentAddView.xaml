@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="School_Bus.Views.Student.StudentAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:School_Bus.Views.Student"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" BorderThickness="7" BorderBrush="Brown">
+    <Grid Background="#F9B572">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            
+        </Grid.ColumnDefinitions>
+        
+        
+
+        <Button x:Name="btnClose"
+                Style="{StaticResource controlButton}"
+                Tag="{StaticResource color4}"
+                Click="btnClose_Click"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0  0  0  20"
+                Grid.Column="2">
+            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+        </Button>
+
+        <StackPanel Grid.Row="1"
+                    >
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="Firstname"
+                       Margin="10 0 0 0"
+                       FontSize="16"
+                       FontWeight="Bold"></TextBlock>
+
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Background="LightYellow"
+                     Width="300"
+                     HorizontalAlignment="Left"
+                     Margin="10 0 0 0"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="Orange"></TextBox>
+
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="Lastname"
+                       Margin="10 0 0 0"
+                       FontSize="16"
+                       FontWeight="Bold"></TextBlock>
+
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Background="LightYellow"
+                     Width="300"
+                     HorizontalAlignment="Left"
+                     Margin="10 0 0 0"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="Orange"></TextBox>
+
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="Class Id"
+                       Margin="10 0 0 0"
+                       FontSize="16"
+                       FontWeight="Bold"></TextBlock>
+
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Background="LightYellow"
+                     Width="300"
+                     HorizontalAlignment="Left"
+                     Margin="10 0 0 0"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="Orange"></TextBox>
+
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="Parent Id"
+                       Margin="10 0 0 0"
+                       FontSize="16"
+                       FontWeight="Bold"></TextBlock>
+
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Background="LightYellow"
+                     Width="300"
+                     HorizontalAlignment="Left"
+                     Margin="10 0 0 0"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="Orange"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="Bus Id"
+                       Margin="10 0 0 0"
+                       FontSize="16"
+                       FontWeight="Bold"></TextBlock>
+
+            <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                     Background="LightYellow"
+                     Width="300"
+                     HorizontalAlignment="Left"
+                     Margin="10 0 0 0"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="Orange"></TextBox>
+            <Button Width="100"
+                    Margin="0 10 60 0"
+                    Content="Add"
+                    FontWeight="Bold"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

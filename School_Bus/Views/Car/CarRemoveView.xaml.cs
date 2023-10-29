@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace School_Bus.Views
+namespace School_Bus.Views.Car
 {
     /// <summary>
-    /// Interaction logic for CarView.xaml
+    /// Interaction logic for CarRemoveView.xaml
     /// </summary>
-    public partial class CarView : UserControl
+    public partial class CarRemoveView : UserControl
     {
-        public CarView()
+        public CarRemoveView()
         {
             InitializeComponent();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            CarView.outputwindow.Close();
         }
     }
 }
