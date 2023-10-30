@@ -1,9 +1,11 @@
 ﻿using Context.Contexts;
+using Entity.Concrete;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +27,7 @@ namespace School_Bus.Views
         {
             InitializeComponent();
         }
+        SchoolBusDB SchoolBusDb = new SchoolBusDB();
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
 
@@ -58,20 +61,36 @@ namespace School_Bus.Views
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            SchoolBusDB SchoolBusDb = new SchoolBusDB();
 
             var Admins = SchoolBusDb.Admins.ToList();
 
             for (int i = 0; i < Admins.Count; i++)
             {
 
-                if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password) 
-                { 
+                if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password)
+                {
                     MainView mainView = new MainView();
                     Close();
                     mainView.ShowDialog();
                 }
             }
+        }
+
+        private void btn_signup_Click(object sender, RoutedEventArgs e)
+        {
+            SchoolBusDb.Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
+            SchoolBusDb.SaveChanges();
+            SnackBar.IsActive = true;
+            Thread thread = new Thread(() =>
+            {
+                Thread.Sleep(1000);
+                Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
+
+
+            });
+            thread.Start();
+            txt_password.Password = string.Empty;
+            txt_username.Text = string.Empty;
         }
     }
 }

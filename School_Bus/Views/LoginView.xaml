@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:School_Bus.Views"
         mc:Ignorable="d"
-        Title="LoginView" Height="695" Width="450"
+        Title="LoginView" Height="750" Width="450"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
@@ -32,7 +32,11 @@
                 <TextBox Margin="0 50 0 0" x:Name="txt_username" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Enter Username" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"></TextBox>
                 <PasswordBox Margin="0 20 0 0" x:Name="txt_password" Width="300" FontSize="18"  materialDesign:HintAssist.Hint="Enter Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"></PasswordBox>
                 <Button Margin="0 20 0 0" x:Name="btn_login" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="LOG IN" Click="btn_login_Click"></Button>
-                <Button Margin="0 20 0 0" x:Name="btn_signup" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Create Account" ></Button>
+                <Button Margin="0 20 0 0" x:Name="btn_signup" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Create Account" Click="btn_signup_Click"></Button>
+                <materialDesign:Snackbar x:Name="SnackBar" Margin="5" Height="60">
+                    <materialDesign:SnackbarMessage HorizontalContentAlignment="Center"
+    Content="Signed Up!" />
+                </materialDesign:Snackbar>
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>
