@@ -62,18 +62,37 @@ namespace School_Bus.Views
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
 
-            var Admins = SchoolBusDb.Admins.ToList();
-
-            for (int i = 0; i < Admins.Count; i++)
+            if(txt_password.Password!=string.Empty && txt_username.Text!=string.Empty)
             {
+                var Admins = SchoolBusDb.Admins.ToList();
 
-                if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password)
+                for (int i = 0; i < Admins.Count; i++)
                 {
-                    MainView mainView = new MainView();
-                    Close();
-                    mainView.ShowDialog();
+
+                    if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password)
+                    {
+                        MainView mainView = new MainView();
+                        Close();
+                        mainView.ShowDialog();
+                    }
+                    else
+                    {
+                        
+                        SnackBar.IsActive = true;
+                        snackmessage.Content = "Account not found";
+                        Thread thread = new Thread(() =>
+                        {
+                           
+                            Thread.Sleep(1000);
+                            Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
+
+
+                        });
+                        thread.Start();
+                    }
                 }
             }
+            
         }
 
         private void btn_signup_Click(object sender, RoutedEventArgs e)
@@ -81,6 +100,7 @@ namespace School_Bus.Views
             SchoolBusDb.Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
             SchoolBusDb.SaveChanges();
             SnackBar.IsActive = true;
+            snackmessage.Content = "Signed Up";
             Thread thread = new Thread(() =>
             {
                 Thread.Sleep(1000);
