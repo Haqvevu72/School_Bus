@@ -1,4 +1,5 @@
-﻿using System;
+﻿using School_Bus.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace School_Bus.Views.Car
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            CarView.inputwindow.Close();
+            CarViewModel.inputwindow.Close();
         }
     }
 }

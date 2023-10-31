@@ -54,7 +54,6 @@ namespace School_Bus.ViewModels
         public ICommand ShowDriverCommand { get; }
         public ICommand ShowCarCommand { get; }
         public ICommand ShowHolidaysCommand { get; }
-        
 
         // --> Constructor
 
@@ -131,5 +130,6 @@ namespace School_Bus.ViewModels
             Caption = "Holidays";
             Icon = IconChar.BirthdayCake;
         }
+
     }
 }

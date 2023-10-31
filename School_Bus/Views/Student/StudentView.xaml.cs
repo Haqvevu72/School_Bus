@@ -22,63 +22,9 @@ namespace School_Bus.Views
     /// </summary>
     public partial class StudentView : UserControl
     {
-        public static Window outputwindow;
-        public static Window inputwindow;
         public StudentView()
         {
             InitializeComponent();
-        }
-
-        private void Student_Remove_Click(object sender, RoutedEventArgs e)
-        {
-            StudentRemoveView outputControl = new StudentRemoveView();
-            outputwindow = new Window
-            {
-                Content = outputControl,
-                Height = 400,
-                Width = 400,
-
-
-                WindowStyle = WindowStyle.None,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize
-
-            };
-
-            outputControl.MouseDown += (sender, e) =>
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                {
-                    outputwindow.DragMove();
-                }
-            };
-            outputwindow.ShowDialog();
-        }
-
-        private void Add_Student_Click(object sender, RoutedEventArgs e)
-        {
-            StudentAddView outputControl = new StudentAddView();
-            inputwindow = new Window
-            {
-                Content = outputControl,
-                Height = 430,
-                Width = 700,
-
-
-                WindowStyle = WindowStyle.None,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize
-
-            };
-
-            outputControl.MouseDown += (sender, e) =>
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                {
-                    inputwindow.DragMove();
-                }
-            };
-            inputwindow.ShowDialog();
         }
     }
 }

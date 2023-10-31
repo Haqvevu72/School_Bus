@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:School_Bus.Views"
+             xmlns:local="clr-namespace:School_Bus.Views" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodel:StudentViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -45,14 +48,14 @@
             <Button Grid.Column="2"
                 Content="Add Student"
                 Name="Add_Student"
-                Click="Add_Student_Click"
+                Command="{Binding ShowAddStudentViewCommand}"
                 Style="{StaticResource parentButton}">
 
             </Button>
             <Button Grid.Column="3"
                 Content="Remove Student"
                 Name="Student_Remove"
-                Click="Student_Remove_Click"
+                Command="{Binding ShowRemoveStudentViewCommand}"
                 Style="{StaticResource parentButton}">
             </Button>
 

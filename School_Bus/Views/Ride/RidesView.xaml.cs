@@ -20,37 +20,9 @@ namespace School_Bus.Views
     /// </summary>
     public partial class RidesView : UserControl
     {
-        public static Window inputWindow;
-        public static Window outputWindow;
         public RidesView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            RemoveRideView outputControl = new RemoveRideView();
-            outputWindow = new Window
-            {
-                Content = outputControl,
-                Height = 400,
-                Width = 400,
-
-
-                WindowStyle = WindowStyle.None,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize
-
-            };
-
-            outputControl.MouseDown += (sender, e) =>
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                {
-                    outputWindow.DragMove();
-                }
-            };
-            outputWindow.ShowDialog();
         }
     }
 }

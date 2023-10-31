@@ -1,4 +1,5 @@
-﻿using System;
+﻿using School_Bus.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -29,7 +30,7 @@ namespace School_Bus.Views
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            ClassView.inputWindow.Close();
+            ClassViewModel.inputWindow.Close();
         }
 
         

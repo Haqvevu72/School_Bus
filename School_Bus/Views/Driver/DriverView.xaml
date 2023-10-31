@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:School_Bus.Views"
+             xmlns:local="clr-namespace:School_Bus.Views" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewmodel:DriverViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -45,14 +50,14 @@
             <Button Grid.Column="2"
                 Content="Add Driver"
                 Name="Add_Driver"
-                Click="Add_Driver_Click"
+                Command="{Binding ShowAddDriverViewCommand}"
                 Style="{StaticResource parentButton}">
 
             </Button>
             <Button Grid.Column="3"
                     Name="Remove_Driver"
                     Content="Remove Driver"
-                    Click="Remove_Driver_Click"
+                    Command="{Binding ShowRemoveDriverViewCommand}"
                 Style="{StaticResource parentButton}">
             </Button>
 

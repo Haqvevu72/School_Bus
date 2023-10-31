@@ -1,4 +1,5 @@
-﻿using Entity.Concrete;
+﻿using Context.Configurations;
+using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,27 @@ namespace Context.Contexts
             base.OnConfiguring(optionsBuilder);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new StudentConfig());
+            modelBuilder.ApplyConfiguration(new RideConfig());
+            modelBuilder.ApplyConfiguration(new CarConfig());
+        }
+
+
         public DbSet<Admin> Admins { get; set; }
+
+        public DbSet<Ride> Rides { get; set; }
+
+        public DbSet<Class> Classes { get; set; }
+
+        public DbSet<Parent> Parents { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+
+        public DbSet<Driver> Drivers { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
     }
 }
 
