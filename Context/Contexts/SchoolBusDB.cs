@@ -1,6 +1,8 @@
 ﻿using Context.Configurations;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,10 @@ namespace Context.Contexts
 {
     public class SchoolBusDB:DbContext
     {
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-            optionsBuilder.UseSqlServer("Data Source=STHQ0125-17;Initial Catalog=SchoolBusDb;User ID=admin;Password=admin;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=STHQ0125-19;User ID=admin;Password=admin;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -23,6 +25,8 @@ namespace Context.Contexts
             modelBuilder.ApplyConfiguration(new StudentConfig());
             modelBuilder.ApplyConfiguration(new RideConfig());
             modelBuilder.ApplyConfiguration(new CarConfig());
+            //modelBuilder.ApplyConfiguration(new AdminConfig());
+
         }
 
 

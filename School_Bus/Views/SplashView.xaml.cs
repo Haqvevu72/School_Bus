@@ -36,7 +36,7 @@ namespace School_Bus.Views
 
         void worker_dowork(object sender, DoWorkEventArgs e)
         {
-            for (int i = 0; i <= 100; i++)
+            for (int i = 0; i <= 50; i++)
             {
                 (sender as BackgroundWorker).ReportProgress(i);
                 Thread.Sleep(80);
@@ -46,7 +46,7 @@ namespace School_Bus.Views
         void worker_progresschanged(object sender, ProgressChangedEventArgs e)
         {
             prog_bar.Value = e.ProgressPercentage;
-            if (prog_bar.Value == 100)
+            if (prog_bar.Value == 50)
             {
                 LoginView loginscreen = new LoginView();
                 Close();

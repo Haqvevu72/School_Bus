@@ -16,6 +16,10 @@ namespace Context.Configurations
                 builder.HasOne(c => c.Driver)
                        .WithOne(d => d.Car)
                        .HasForeignKey<Car>(c => c.DriverId);
+
+            // HasData
+            
+            
         }
     }
 }

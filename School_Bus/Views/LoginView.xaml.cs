@@ -62,7 +62,7 @@ namespace School_Bus.Views
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
 
-            if(txt_password.Password!=string.Empty && txt_username.Text!=string.Empty)
+            if (txt_password.Password != string.Empty && txt_username.Text != string.Empty)
             {
                 var Admins = SchoolBusDb.Admins.ToList();
 
@@ -77,13 +77,13 @@ namespace School_Bus.Views
                     }
                     else
                     {
-                        
+
                         SnackBar.IsActive = true;
                         snackmessage.Content = "Account not found";
                         Thread thread = new Thread(() =>
                         {
-                           
-                            Thread.Sleep(1000);
+
+                            Thread.Sleep(1500);
                             Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
 
 
@@ -92,23 +92,40 @@ namespace School_Bus.Views
                     }
                 }
             }
-            
+
         }
 
         private void btn_signup_Click(object sender, RoutedEventArgs e)
         {
-            SchoolBusDb.Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
-            SchoolBusDb.SaveChanges();
-            SnackBar.IsActive = true;
-            snackmessage.Content = "Signed Up";
-            Thread thread = new Thread(() =>
+            if (txt_username.Text != string.Empty && txt_password.Password != string.Empty)
             {
-                Thread.Sleep(1000);
-                Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
+                SchoolBusDb.Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
+                SchoolBusDb.SaveChanges();
+                SnackBar.IsActive = true;
+                snackmessage.Content = "Signed Up";
+                Thread thread = new Thread(() =>
+                {
+                    Thread.Sleep(1500);
+                    Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
 
 
-            });
-            thread.Start();
+                });
+                thread.Start();
+            }
+            else 
+            {
+                SnackBar.IsActive = true;
+                snackmessage.Content = "Please Add Username and Password";
+                Thread thread = new Thread(() =>
+                {
+
+                    Thread.Sleep(1500);
+                    Dispatcher.Invoke(() => { SnackBar.IsActive = false; });
+
+
+                });
+                thread.Start();
+            }
             txt_password.Password = string.Empty;
             txt_username.Text = string.Empty;
         }
