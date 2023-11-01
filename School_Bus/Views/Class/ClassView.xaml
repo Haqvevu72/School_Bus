@@ -66,7 +66,8 @@
             Padding="10">
             <DataGrid ColumnWidth="*"
               Background="Transparent"
-              BorderThickness="0">
+              BorderThickness="0"
+              Name="Classes">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -76,11 +77,6 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Class Name"/>
-
-                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>
