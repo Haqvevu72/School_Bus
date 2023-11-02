@@ -9,9 +9,9 @@ namespace Context.Repositories.Abstract
 
         void Delete(T entity);
 
-        ICollection<T> GetAll();
+        List<T> GetAll();
 
-        void AddRange(ICollection<T> entities);
+        void AddRange(List<T> entities);
 
         void SaveChanges();
     }

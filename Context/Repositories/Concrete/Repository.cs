@@ -27,7 +27,7 @@ namespace Context.Repositories.Concrete
             DB_Set.Add(entity);
         }
 
-        public void AddRange(ICollection<T> entities)
+        public void AddRange(List<T> entities)
         {
             DB_Set.AddRange(entities);
         }
@@ -37,7 +37,7 @@ namespace Context.Repositories.Concrete
             DB_Set.Remove(entity);
         }
 
-        public ICollection<T> GetAll()
+        public List<T> GetAll()
         {
             return DB_Set.ToList();
         }
