@@ -1,4 +1,5 @@
 ﻿using Context.Contexts;
+using Context.Repositories.Concrete;
 using Entity.Concrete;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -27,7 +28,7 @@ namespace School_Bus.Views
         {
             InitializeComponent();
         }
-        SchoolBusDB SchoolBusDb = new SchoolBusDB();
+        Repository<Admin> Admins = new Repository<Admin>();
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
 
@@ -61,15 +62,15 @@ namespace School_Bus.Views
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-
+            
             if (txt_password.Password != string.Empty && txt_username.Text != string.Empty)
             {
-                var Admins = SchoolBusDb.Admins.ToList();
+                var admins = Admins.GetAll();
 
-                for (int i = 0; i < Admins.Count; i++)
+                for (int i = 0; i < admins.Count; i++)
                 {
 
-                    if (txt_username.Text == Admins[i].Username && txt_password.Password == Admins[i].Password)
+                    if (txt_username.Text == admins[i].Username && txt_password.Password == admins[i].Password)
                     {
                         MainView mainView = new MainView();
                         Close();
@@ -99,8 +100,8 @@ namespace School_Bus.Views
         {
             if (txt_username.Text != string.Empty && txt_password.Password != string.Empty)
             {
-                SchoolBusDb.Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
-                SchoolBusDb.SaveChanges();
+                Admins.Add(new Admin() { Username = txt_username.Text, Password = txt_password.Password });
+                Admins.SaveChanges();
                 SnackBar.IsActive = true;
                 snackmessage.Content = "Signed Up";
                 Thread thread = new Thread(() =>
