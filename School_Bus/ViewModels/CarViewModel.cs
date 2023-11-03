@@ -2,6 +2,7 @@
 using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Car;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -10,10 +11,27 @@ namespace School_Bus.ViewModels
 {
     public class CarViewModel:BaseViewModel
     {
+        Repository<Car> repository = new Repository<Car>();
         public static Window outputwindow;
         public static Window inputwindow;
         public ICommand ShowCarAddViewCommand { get; }
-        public ICommand ShowCarRemoveViewCommand { get; set; }
+        public ICommand ShowCarRemoveViewCommand { get; }
+        public ICommand SearchCommand { get; }
+
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
 
         private ObservableCollection<CarDTO> carlist;
         public ObservableCollection<CarDTO> CarList
@@ -30,7 +48,7 @@ namespace School_Bus.ViewModels
         {
             ShowCarAddViewCommand = new ViewModelCommand(ExecuteShowCarAddViewCommand);
             ShowCarRemoveViewCommand = new ViewModelCommand(ExecuteShowCarRemoveViewCommand);
-            Repository<Car> repository = new Repository<Car>();
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
             CarList = new ObservableCollection<CarDTO>(repository.Cars());
         }
 
@@ -84,6 +102,16 @@ namespace School_Bus.ViewModels
                 }
             };
             inputwindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object? parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                CarList.Clear();
+                CarList.Add(new CarDTO() { Id = result.Id, DriverId = result.DriverId , Capacity = result.Capacity , Number = result.Number });
+            }
         }
     }
 }

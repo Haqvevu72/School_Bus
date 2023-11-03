@@ -28,6 +28,11 @@ namespace Context.Repositories.Concrete
             DB_Set.Add(entity);
         }
 
+        public T GetById(int id)
+        {
+            return DB_Set.FirstOrDefault(t => t.Id == id);
+        }
+
         public void AddRange(List<T> entities)
         {
             DB_Set.AddRange(entities);

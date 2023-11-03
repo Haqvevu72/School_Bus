@@ -2,6 +2,7 @@
 using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Driver;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
@@ -11,10 +12,29 @@ namespace School_Bus.ViewModels
 {
     public class DriverViewModel:BaseViewModel
     {
+        Repository<Driver> repository = new Repository<Driver>();
         public static Window outputwindow;
         public static Window inputwindow;
         public ICommand ShowRemoveDriverViewCommand { get; set; }
         public ICommand ShowAddDriverViewCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
+
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
 
         private ObservableCollection<DriverDTO> driverlist;
         public ObservableCollection<DriverDTO> DriverList
@@ -31,7 +51,10 @@ namespace School_Bus.ViewModels
         {
             ShowRemoveDriverViewCommand = new ViewModelCommand(ExecuteShowRemoveDriverViewCommand);
             ShowAddDriverViewCommand= new ViewModelCommand(ExecuteShowAddDriverViewCommand);
-            Repository<Driver> repository = new Repository<Driver>();
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+
+
+
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
         }
 
@@ -84,6 +107,16 @@ namespace School_Bus.ViewModels
                 }
             };
             inputwindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                DriverList.Clear();
+                DriverList.Add(new DriverDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Address = result.Address , Phone = result.Phone });
+            }
         }
     }
 }

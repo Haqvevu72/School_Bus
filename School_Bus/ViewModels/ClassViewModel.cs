@@ -16,8 +16,11 @@ namespace School_Bus.ViewModels
 {
     public class ClassViewModel:BaseViewModel
     {
+        public Repository<Class> repository = new Repository<Class>();
         public ICommand ShowRemoveClassViewCommand { get; }
         public ICommand ShowAddClassViewCommand { get; }
+        public ICommand SearchCommand { get; }
+
         public static Window inputWindow;
         public static Window outputWindow;
 
@@ -32,11 +35,29 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
+
         public ClassViewModel()
         {
             ShowRemoveClassViewCommand = new ViewModelCommand(ExecuteShowRemoveClassViewCommand);
             ShowAddClassViewCommand = new ViewModelCommand(ExecuteShowAddClassViewCommand);
-            Repository<Class> repository = new Repository<Class>();
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+
+
             ClassList = new ObservableCollection<ClassDTO>(repository.Classes());
         }
 
@@ -90,6 +111,16 @@ namespace School_Bus.ViewModels
                 }
             };
             inputWindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object? parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                ClassList.Clear();
+                ClassList.Add(new ClassDTO() { Id = result.Id, Name = result.Name });
+            }
         }
     }
 }
