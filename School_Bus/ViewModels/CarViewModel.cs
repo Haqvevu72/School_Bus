@@ -1,4 +1,8 @@
-﻿using School_Bus.Views.Car;
+﻿using Context.Repositories.Concrete;
+using Entity.Concrete;
+using Entity.DTO;
+using School_Bus.Views.Car;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,10 +15,23 @@ namespace School_Bus.ViewModels
         public ICommand ShowCarAddViewCommand { get; }
         public ICommand ShowCarRemoveViewCommand { get; set; }
 
+        private ObservableCollection<CarDTO> carlist;
+        public ObservableCollection<CarDTO> CarList
+        {
+            get { return carlist; }
+            set
+            {
+                carlist = value;
+                OnPropertyChanged(nameof(CarList)); // Notify property change
+            }
+        }
+
         public CarViewModel()
         {
             ShowCarAddViewCommand = new ViewModelCommand(ExecuteShowCarAddViewCommand);
             ShowCarRemoveViewCommand = new ViewModelCommand(ExecuteShowCarRemoveViewCommand);
+            Repository<Car> repository = new Repository<Car>();
+            CarList = new ObservableCollection<CarDTO>(repository.Cars());
         }
 
         public void ExecuteShowCarRemoveViewCommand(object? parameter)

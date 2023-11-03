@@ -1,6 +1,7 @@
 ﻿using Context.Contexts;
 using Context.Repositories.Abstract;
 using Entity.Abstract;
+using Entity.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,42 @@ namespace Context.Repositories.Concrete
         public void Update(T entity)
         {
             DB_Set.Update(entity);
+        }
+
+        public List<RideDTO> Rides()
+        {
+            List<RideDTO> rideDTO = new List<RideDTO>(schoolBusDB.Rides.Select(r => new RideDTO() { Id = r.Id, BusId = r.BusId , StartPoint=r.StartPoint , EndPoint=r.EndPoint,Passengers = r.Passengers}));
+            return rideDTO;
+        }
+
+        public List<ClassDTO> Classes() 
+        {
+            List<ClassDTO> classDTO = new List<ClassDTO>(schoolBusDB.Classes.Select(c => new ClassDTO() { Id = c.Id, Name = c.Name }));
+            return classDTO;
+        }
+
+        public List<StudentDTO> Students()
+        {
+            List<StudentDTO> studentDTO = new List<StudentDTO>(schoolBusDB.Students.Select(s => new StudentDTO() { Id = s.Id, Firstname = s.FirstName , Lastname = s.LastName , BusId = s.BusId , ClassId = s.ClassId , ParentId = s.ParentId }));
+            return studentDTO;
+        }
+
+        public List<ParentDTO> Parents()
+        {
+            List<ParentDTO> parentDTO = new List<ParentDTO>(schoolBusDB.Parents.Select(p => new ParentDTO() { Id = p.Id, Firstname = p.FirstName, Lastname = p.LastName, Phone = p.Phone , Address=p.Address }));
+            return parentDTO;
+        }
+
+        public List<DriverDTO> Drivers()
+        {
+            List<DriverDTO> driverDTO = new List<DriverDTO>(schoolBusDB.Drivers.Select(d => new DriverDTO() { Id = d.Id, Firstname = d.FirstName, Lastname = d.LastName, Phone = d.Phone, Address = d.Address }));
+            return driverDTO;
+        }
+
+        public List<CarDTO> Cars()
+        {
+            List<CarDTO> carDTO = new List<CarDTO>(schoolBusDB.Cars.Select(c => new CarDTO() { Id = c.Id , Capacity = c.Capacity , Number = c.Number , DriverId = c.DriverId}));
+            return carDTO;
         }
     }
 }

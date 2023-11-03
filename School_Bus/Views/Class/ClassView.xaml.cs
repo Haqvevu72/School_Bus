@@ -14,9 +14,6 @@ namespace School_Bus.Views
         public ClassView()
         {
             InitializeComponent();
-            SchoolBusDB db = new SchoolBusDB();
-            List<ClassDTO> classes = db.Classes.Select(c => new ClassDTO{Id = c.Id,Name = c.Name}).ToList();
-            Classes.ItemsSource = classes;
         }
     }
 }

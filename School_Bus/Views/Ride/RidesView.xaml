@@ -61,7 +61,8 @@
         Padding="10">
             <DataGrid ColumnWidth="*"
           Background="Transparent"
-          BorderThickness="0">
+          BorderThickness="0"
+                      ItemsSource="{Binding RideList}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -71,17 +72,6 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Bus ID"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Start Point"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="End Point"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Passengers"/>
-                    
-                    
-
-
-                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>

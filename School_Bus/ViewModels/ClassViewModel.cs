@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using School_Bus.Views;
+using System.Collections.ObjectModel;
+using Entity.Concrete;
+using Context.Contexts;
+using Entity.DTO;
+using Context.Repositories.Concrete;
 
 namespace School_Bus.ViewModels
 {
@@ -16,10 +21,23 @@ namespace School_Bus.ViewModels
         public static Window inputWindow;
         public static Window outputWindow;
 
+        private ObservableCollection<ClassDTO> classlist;
+        public ObservableCollection<ClassDTO> ClassList
+        {
+            get { return classlist; }
+            set
+            {
+                classlist = value;
+                OnPropertyChanged(nameof(ClassList)); // Notify property change
+            }
+        }
+
         public ClassViewModel()
         {
             ShowRemoveClassViewCommand = new ViewModelCommand(ExecuteShowRemoveClassViewCommand);
             ShowAddClassViewCommand = new ViewModelCommand(ExecuteShowAddClassViewCommand);
+            Repository<Class> repository = new Repository<Class>();
+            ClassList = new ObservableCollection<ClassDTO>(repository.Classes());
         }
 
         public void ExecuteShowRemoveClassViewCommand(object parameter)

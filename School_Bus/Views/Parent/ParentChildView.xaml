@@ -67,7 +67,8 @@
                 Padding="10">
             <DataGrid ColumnWidth="*"
                   Background="Transparent"
-                  BorderThickness="0">
+                  BorderThickness="0"
+                  ItemsSource="{Binding ParentList}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -77,14 +78,6 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="First name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Last name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Phone"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Address"/>
-                    
-                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>

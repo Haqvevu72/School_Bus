@@ -21,6 +21,7 @@ namespace School_Bus.Views
     /// </summary>
     public partial class SplashView : Window
     {
+        static public LoginView loginscreen = new LoginView();
         public SplashView()
         {
             InitializeComponent();
@@ -48,7 +49,6 @@ namespace School_Bus.Views
             prog_bar.Value = e.ProgressPercentage;
             if (prog_bar.Value == 50)
             {
-                LoginView loginscreen = new LoginView();
                 Close();
                 loginscreen.ShowDialog();
             }

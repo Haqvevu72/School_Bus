@@ -1,4 +1,9 @@
-﻿using School_Bus.Views.Driver;
+﻿using Context.Repositories.Concrete;
+using Entity.Concrete;
+using Entity.DTO;
+using School_Bus.Views.Driver;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,10 +16,23 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveDriverViewCommand { get; set; }
         public ICommand ShowAddDriverViewCommand { get; set; }
 
+        private ObservableCollection<DriverDTO> driverlist;
+        public ObservableCollection<DriverDTO> DriverList
+        {
+            get { return driverlist; }
+            set
+            {
+                driverlist = value;
+                OnPropertyChanged(nameof(DriverList)); // Notify property change
+            }
+        }
+
         public DriverViewModel()
         {
             ShowRemoveDriverViewCommand = new ViewModelCommand(ExecuteShowRemoveDriverViewCommand);
             ShowAddDriverViewCommand= new ViewModelCommand(ExecuteShowAddDriverViewCommand);
+            Repository<Driver> repository = new Repository<Driver>();
+            DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
         }
 
         public void ExecuteShowRemoveDriverViewCommand(object? parameter)

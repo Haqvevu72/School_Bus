@@ -68,7 +68,8 @@
             Padding="10">
             <DataGrid ColumnWidth="*"
               Background="Transparent"
-              BorderThickness="0">
+              BorderThickness="0"
+              ItemsSource="{Binding CarList}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -78,12 +79,6 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Driver ID"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Capacity"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Number"/>
-                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>

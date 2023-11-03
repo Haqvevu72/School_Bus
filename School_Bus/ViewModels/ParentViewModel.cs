@@ -1,4 +1,9 @@
-﻿using School_Bus.Views.Parent;
+﻿using Context.Repositories.Concrete;
+using Entity.Concrete;
+using Entity.DTO;
+using School_Bus.Views.Parent;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,10 +16,23 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveParentViewCommand { get; }
         public ICommand ShowAddParentViewCommand { get; }
 
+        private ObservableCollection<ParentDTO> parentlist;
+        public ObservableCollection<ParentDTO> ParentList
+        {
+            get { return parentlist; }
+            set
+            {
+                parentlist = value;
+                OnPropertyChanged(nameof(ParentList)); // Notify property change
+            }
+        }
+
         public ParentViewModel()
         {
             ShowRemoveParentViewCommand = new ViewModelCommand(ExecuteShowRemoveParentViewCommand);
             ShowAddParentViewCommand = new ViewModelCommand(ExecuteShowAddParentViewCommand);
+            Repository<Parent> repository = new Repository<Parent>();
+            ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
         }
 
         public void ExecuteShowRemoveParentViewCommand(object? parameter)

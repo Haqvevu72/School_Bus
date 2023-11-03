@@ -15,7 +15,7 @@ using System.Windows.Threading;
 
 namespace School_Bus.ViewModels
 {
-    public class LoginViewModel:BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         public Repository<Admin> Admins = new Repository<Admin>();
         public bool IsDarkTheme { get; set; }
@@ -79,7 +79,7 @@ namespace School_Bus.ViewModels
             SignUpCommand = new ViewModelCommand(ExecuteSignUpCommand);
         }
 
-        public void ExecuteToggleTheme(object? parameter) 
+        public void ExecuteToggleTheme(object? parameter)
         {
             ITheme theme = paletteHelper.GetTheme();
             if (IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark)
@@ -102,39 +102,59 @@ namespace School_Bus.ViewModels
 
         public void ExecuteLoginCommand(object? parameter)
         {
-
-            if (Password != string.Empty && Username != string.Empty)
+            bool found = false;
+            if (!(string.IsNullOrEmpty(Password) && string.IsNullOrEmpty(Username)))
             {
                 var admins = Admins.GetAll();
 
                 for (int i = 0; i < admins.Count; i++)
                 {
 
-                    if (Username== admins[i].Username && Password == admins[i].Password)
+                    if (Username == admins[i].Username && Password == admins[i].Password)
                     {
+                        found = true;
                         MainView mainView = new MainView();
-                        Application.Current.Shutdown();
+                        SplashView.loginscreen.Close();
                         mainView.ShowDialog();
-                    }
-                    else
-                    {
+                        
 
-                        IsSnackBarVisible = true;
-                        SnackBarMessage = "Account not found";
-                        Thread thread = new Thread(() =>
-                        {
-
-                            Thread.Sleep(1500);
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                IsSnackBarVisible = false;
-                            });
-
-
-                        });
-                        thread.Start();
+                        break;
                     }
                 }
+                if (found == false)
+                {
+                    IsSnackBarVisible = true;
+                    SnackBarMessage = "Account not found";
+                    Thread thread = new Thread(() =>
+                    {
+
+                        Thread.Sleep(1500);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            IsSnackBarVisible = false;
+                        });
+
+
+                    });
+                    thread.Start();
+                }
+            }
+            else
+            {
+                IsSnackBarVisible = true;
+                SnackBarMessage = "Please Add Username and Password";
+                Thread thread = new Thread(() =>
+                {
+
+                    Thread.Sleep(1500);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        IsSnackBarVisible = false;
+                    });
+
+
+                });
+                thread.Start();
             }
         }
 
@@ -144,7 +164,7 @@ namespace School_Bus.ViewModels
             {
                 Admins.Add(new Admin() { Username = Username, Password = Password });
                 Admins.SaveChanges();
-                IsSnackBarVisible= true;
+                IsSnackBarVisible = true;
                 SnackBarMessage = "Signed Up";
                 Thread thread = new Thread(() =>
                 {
@@ -160,8 +180,8 @@ namespace School_Bus.ViewModels
             }
             else
             {
-                IsSnackBarVisible= true;
-                SnackBarMessage= "Please Add Username and Password";
+                IsSnackBarVisible = true;
+                SnackBarMessage = "Please Add Username and Password";
                 Thread thread = new Thread(() =>
                 {
 

@@ -1,4 +1,9 @@
-﻿using School_Bus.Views.Student;
+﻿using Context.Repositories.Concrete;
+using Entity.Concrete;
+using Entity.DTO;
+using School_Bus.Views.Student;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,10 +16,25 @@ namespace School_Bus.ViewModels
         public ICommand ShowAddStudentViewCommand { get; }
         public ICommand ShowRemoveStudentViewCommand { get; }
 
+
+        private ObservableCollection<StudentDTO> studentlist;
+        public ObservableCollection<StudentDTO> StudentList
+        {
+            get { return studentlist; }
+            set
+            {
+                studentlist = value;
+                OnPropertyChanged(nameof(StudentList)); // Notify property change
+            }
+        }
+
         public StudentViewModel()
         {
             ShowAddStudentViewCommand = new ViewModelCommand(ExecuteShowAddStudentViewCommand);
             ShowRemoveStudentViewCommand = new ViewModelCommand(ExecuteShowRemoveStudentViewCommand);
+
+            Repository<Student> repository = new Repository<Student>();
+            StudentList = new ObservableCollection<StudentDTO>(repository.Students());
         }
 
         public void ExecuteShowRemoveStudentViewCommand(object? parameter)

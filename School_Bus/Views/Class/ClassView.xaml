@@ -67,7 +67,8 @@
             <DataGrid ColumnWidth="*"
               Background="Transparent"
               BorderThickness="0"
-              Name="Classes">
+              Name="Classes"
+              ItemsSource="{Binding ClassList}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
