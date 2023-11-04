@@ -2,6 +2,7 @@
 using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Student;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
@@ -15,6 +16,24 @@ namespace School_Bus.ViewModels
         public static Window inputwindow;
         public ICommand ShowAddStudentViewCommand { get; }
         public ICommand ShowRemoveStudentViewCommand { get; }
+        public ICommand SearchCommand { get; }
+        Repository<Student> repository = new Repository<Student>();
+
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
 
 
         private ObservableCollection<StudentDTO> studentlist;
@@ -32,9 +51,9 @@ namespace School_Bus.ViewModels
         {
             ShowAddStudentViewCommand = new ViewModelCommand(ExecuteShowAddStudentViewCommand);
             ShowRemoveStudentViewCommand = new ViewModelCommand(ExecuteShowRemoveStudentViewCommand);
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
 
-            Repository<Student> repository = new Repository<Student>();
-            StudentList = new ObservableCollection<StudentDTO>(repository.Students());
+            //StudentList = new ObservableCollection<StudentDTO>(repository.Students());
         }
 
         public void ExecuteShowRemoveStudentViewCommand(object? parameter)
@@ -87,6 +106,16 @@ namespace School_Bus.ViewModels
                 }
             };
             inputwindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                StudentList.Clear();
+                StudentList.Add(new StudentDTO() { Id = result.Id, Firstname=result.FirstName , Lastname=result.LastName,ParentId=result.ParentId,ClassId = result.ClassId ,BusId = result.BusId});
+            }
         }
     }
 }

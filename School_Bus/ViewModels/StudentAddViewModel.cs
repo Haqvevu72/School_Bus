@@ -4,36 +4,51 @@ using System.Windows.Input;
 
 namespace School_Bus.ViewModels
 {
-    public class CreateRideViewModel:BaseViewModel
+    public class StudentAddViewModel:BaseViewModel
     {
         // Properties
 
-                private string startpoint;
+                private string firstname;
 
-                public string StartPoint
+                public string FirstName
                 {
-                    get { return startpoint; }
+                    get { return firstname; }
                     set
                     {
-                        if (startpoint != value)
+                        if (firstname != value)
                         {
-                            startpoint = value;
-                            OnPropertyChanged(nameof(StartPoint));
+                            firstname = value;
+                            OnPropertyChanged(nameof(FirstName));
                         }
                     }
                 }
              // ................................
-                private string endpoint;
+                private string lastname;
 
-                public string EndPoint
+                public string LastName
                 {
-                    get { return endpoint; }
+                    get { return lastname; }
                     set
                     {
-                        if (endpoint != value)
+                        if (lastname != value)
                         {
-                            endpoint = value;
-                            OnPropertyChanged(nameof(EndPoint));
+                            lastname = value;
+                            OnPropertyChanged(nameof(LastName));
+                        }
+                    }
+                }
+             // ................................
+                private int classid;
+
+                public int ClassId
+                {
+                    get { return classid; }
+                    set
+                    {
+                        if (classid != value)
+                        {
+                            classid = value;
+                            OnPropertyChanged(nameof(ClassId));
                         }
                     }
                 }
@@ -41,7 +56,7 @@ namespace School_Bus.ViewModels
                 private int busid;
 
                 public int BusId
-                {
+        {
                     get { return busid; }
                     set
                     {
@@ -53,17 +68,17 @@ namespace School_Bus.ViewModels
                     }
                 }
              // ................................
-                private int passengers;
+                private int parentid;
 
-                public int Passengers
+                public int ParentId
                 {
-                    get { return passengers; }
+                    get { return parentid; }
                     set
                     {
-                        if (passengers != value)
+                        if (parentid != value)
                         {
-                            passengers = value;
-                            OnPropertyChanged(nameof(Passengers));
+                            parentid = value;
+                            OnPropertyChanged(nameof(ParentId));
                         }
                     }
                 }
@@ -76,7 +91,7 @@ namespace School_Bus.ViewModels
 
         // Constructor
 
-                public CreateRideViewModel()
+                public StudentAddViewModel()
                 {
                     // Initialize Commands
 
@@ -87,7 +102,7 @@ namespace School_Bus.ViewModels
 
                 public void ExecuteAddCommand(object parameter)
                 {
-                    MessageBox.Show(BusId.ToString()+'\n'+StartPoint+'\n'+EndPoint+'\n'+Passengers.ToString());
+                    MessageBox.Show(FirstName+'\n'+LastName+'\n'+ClassId+'\n'+BusId+'\n'+ParentId);
                 }
     }
 }

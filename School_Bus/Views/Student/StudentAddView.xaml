@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:School_Bus.Views.Student"
+             xmlns:local="clr-namespace:School_Bus.Views.Student" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" BorderThickness="7" BorderBrush="Brown">
+    <UserControl.DataContext>
+        <viewmodel:StudentAddViewModel/>
+    </UserControl.DataContext>
+    
     <Grid Background="#F9B572">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -46,7 +50,8 @@
                      Margin="10 0 0 0"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="Orange"></TextBox>
+                     Foreground="Orange"
+                     Text="{Binding FirstName}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                        Text="Lastname"
@@ -61,7 +66,8 @@
                      Margin="10 0 0 0"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="Orange"></TextBox>
+                     Foreground="Orange"
+                     Text="{Binding LastName}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                        Text="Class Id"
@@ -76,7 +82,8 @@
                      Margin="10 0 0 0"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="Orange"></TextBox>
+                     Foreground="Orange" 
+                     Text="{Binding ClassId}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                        Text="Parent Id"
@@ -91,7 +98,8 @@
                      Margin="10 0 0 0"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="Orange"></TextBox>
+                     Foreground="Orange" 
+                     Text="{Binding ParentId}"></TextBox>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
@@ -108,11 +116,13 @@
                      Margin="10 0 0 0"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="Orange"></TextBox>
+                     Foreground="Orange"
+                     Text="{Binding BusId}"></TextBox>
             <Button Width="100"
                     Margin="0 10 60 0"
                     Content="Add"
-                    FontWeight="Bold"></Button>
+                    FontWeight="Bold"
+                    Command="{Binding AddCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

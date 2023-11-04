@@ -2,6 +2,7 @@
 using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Parent;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
@@ -11,10 +12,29 @@ namespace School_Bus.ViewModels
 {
     public class ParentViewModel:BaseViewModel
     {
+        Repository<Parent> repository = new Repository<Parent>();
         public static Window outputwindow;
         public static Window inputwindow;
         public ICommand ShowRemoveParentViewCommand { get; }
         public ICommand ShowAddParentViewCommand { get; }
+        public ICommand SearchCommand { get; set; }
+
+
+
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
 
         private ObservableCollection<ParentDTO> parentlist;
         public ObservableCollection<ParentDTO> ParentList
@@ -31,8 +51,8 @@ namespace School_Bus.ViewModels
         {
             ShowRemoveParentViewCommand = new ViewModelCommand(ExecuteShowRemoveParentViewCommand);
             ShowAddParentViewCommand = new ViewModelCommand(ExecuteShowAddParentViewCommand);
-            Repository<Parent> repository = new Repository<Parent>();
-            ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+            //ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
         }
 
         public void ExecuteShowRemoveParentViewCommand(object? parameter)
@@ -85,6 +105,16 @@ namespace School_Bus.ViewModels
                 }
             };
             inputwindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object? parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                ParentList.Clear();
+                ParentList.Add(new ParentDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Phone = result.Phone , Address = result.Address });
+            }
         }
     }
 }

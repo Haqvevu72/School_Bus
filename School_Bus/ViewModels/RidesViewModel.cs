@@ -19,7 +19,9 @@ namespace School_Bus.ViewModels
         
         public static Window outputWindow;
 
+        Repository<Ride> repository = new Repository<Ride>();
         public ICommand ShowRemoveRidesViewCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         private ObservableCollection<RideDTO> ridelist;
         public ObservableCollection<RideDTO> RideList
@@ -34,12 +36,28 @@ namespace School_Bus.ViewModels
 
 
 
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
 
         public RidesViewModel()
         {
             ShowRemoveRidesViewCommand = new ViewModelCommand(ExecuteShowRemoveRidesViewCommand);
-            Repository<Ride> repository = new Repository<Ride>();
-            RideList = new ObservableCollection<RideDTO>(repository.Rides());
+            SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+
+            //RideList = new ObservableCollection<RideDTO>(repository.Rides());
         }
 
         public void ExecuteShowRemoveRidesViewCommand(object? parameter)
@@ -66,6 +84,16 @@ namespace School_Bus.ViewModels
                 }
             };
             outputWindow.ShowDialog();
+        }
+
+        public void ExecuteSearchCommand(object parameter)
+        {
+            if (string.IsNullOrEmpty(Id) == false)
+            {
+                var result = repository.GetById(Convert.ToInt32(Id));
+                RideList.Clear();
+                RideList.Add(new RideDTO() { Id = result.Id, BusId = result.BusId , StartPoint = result.StartPoint , EndPoint = result.EndPoint , Passengers = result.Passengers});
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace School_Bus.ViewModels
 
 
 
-            DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
+            //DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
         }
 
         public void ExecuteShowRemoveDriverViewCommand(object? parameter)

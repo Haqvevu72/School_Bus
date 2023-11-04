@@ -58,7 +58,7 @@ namespace School_Bus.ViewModels
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
 
 
-            ClassList = new ObservableCollection<ClassDTO>(repository.Classes());
+            //ClassList = new ObservableCollection<ClassDTO>(repository.Classes());
         }
 
         public void ExecuteShowRemoveClassViewCommand(object parameter)

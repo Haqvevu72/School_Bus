@@ -4,11 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-      xmlns:local="clr-namespace:School_Bus.Views"
+      xmlns:local="clr-namespace:School_Bus.Views" 
+      xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
       Title="ClassAddView">
-
+    <Page.DataContext>
+        <viewmodel:ClassAddViewModel/>
+    </Page.DataContext>
+    
     <Grid Background="#F9B572">
         
         <Grid.RowDefinitions>
@@ -38,15 +42,15 @@
                      HorizontalAlignment="Left"
                      Margin="20 0 0 0"
                      Background="LightYellow"
-                     FontWeight="Bold"></TextBox
-                     >
+                     FontWeight="Bold"
+                     Text="{Binding ClassName}"></TextBox>
             <Button 
                     x:Name="btnAdd"
                     Foreground="White"
                     Width="100"
                     Margin="0 20 0 0"
                     Content="Add"
-                    ></Button>
+                    Command="{Binding AddCommand}"></Button>
         </StackPanel>
 
     </Grid>

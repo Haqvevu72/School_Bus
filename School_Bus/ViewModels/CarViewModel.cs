@@ -49,7 +49,7 @@ namespace School_Bus.ViewModels
             ShowCarAddViewCommand = new ViewModelCommand(ExecuteShowCarAddViewCommand);
             ShowCarRemoveViewCommand = new ViewModelCommand(ExecuteShowCarRemoveViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
-            CarList = new ObservableCollection<CarDTO>(repository.Cars());
+            //CarList = new ObservableCollection<CarDTO>(repository.Cars());
         }
 
         public void ExecuteShowCarRemoveViewCommand(object? parameter)
