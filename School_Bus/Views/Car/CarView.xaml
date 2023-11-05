@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:School_Bus.Views" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
+             xmlns:local="clr-namespace:School_Bus.Views" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -80,6 +80,30 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <!-- Define your existing columns here -->
+                    <!-- For example: -->
+                    <DataGridTextColumn Header="Make" Binding="{Binding Make}" />
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <!-- Add the button inside the row's content -->
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Click Me" Click="Button_Click" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+      
+            In this code, we've wrapped the button inside a StackPanel within the DataTemplate. This will ensure that a button appears in each row of the DataGrid, along with your existing columns. You can customize the button's appearance and handle its click event in your code-behind.
+
+
+
+
+
+
             </DataGrid>
         </Border>
     </Grid>

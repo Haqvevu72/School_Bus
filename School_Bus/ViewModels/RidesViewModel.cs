@@ -101,7 +101,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
-            RideList = new ObservableCollection<RideDTO>(repository.Rides());
+            //RideList = new ObservableCollection<RideDTO>(repository.Rides());
         }
 
         public void ExecuteShowRemoveRidesViewCommand(object? parameter)
