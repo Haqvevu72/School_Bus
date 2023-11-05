@@ -57,7 +57,7 @@ namespace School_Bus.ViewModels
             ShowRemoveRidesViewCommand = new ViewModelCommand(ExecuteShowRemoveRidesViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
 
-            //RideList = new ObservableCollection<RideDTO>(repository.Rides());
+            RideList = new ObservableCollection<RideDTO>(repository.Rides());
         }
 
         public void ExecuteShowRemoveRidesViewCommand(object? parameter)

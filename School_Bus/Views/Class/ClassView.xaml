@@ -69,7 +69,8 @@
               Background="Transparent"
               BorderThickness="0"
               Name="Classes"
-              ItemsSource="{Binding ClassList}">
+              ItemsSource="{Binding ClassList}"
+                      AutoGenerateColumns="True">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>

@@ -58,6 +58,11 @@ namespace Context.Repositories.Concrete
             DB_Set.Update(entity);
         }
 
+        public List<int> GetStudentId()
+        { 
+            return schoolBusDB.Students.Select(t => t.Id).ToList();
+        }
+
         public List<RideDTO> Rides()
         {
             List<RideDTO> rideDTO = new List<RideDTO>(schoolBusDB.Rides.Select(r => new RideDTO() { Id = r.Id, BusId = r.BusId , StartPoint=r.StartPoint , EndPoint=r.EndPoint,Passengers = r.Passengers}));

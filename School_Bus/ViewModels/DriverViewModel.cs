@@ -19,6 +19,7 @@ namespace School_Bus.ViewModels
         public ICommand ShowAddDriverViewCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
+        public ICommand AddCommand { get; set; }
 
         private string id;
 
@@ -31,6 +32,66 @@ namespace School_Bus.ViewModels
                 {
                     id = value;
                     OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
+        private string firstname;
+
+        public string FirstName
+        {
+            get { return firstname; }
+            set
+            {
+                if (firstname != value)
+                {
+                    firstname = value;
+                    OnPropertyChanged(nameof(FirstName));
+                }
+            }
+        }
+        // ................................
+        private string lastname;
+
+        public string LastName
+        {
+            get { return lastname; }
+            set
+            {
+                if (lastname != value)
+                {
+                    lastname = value;
+                    OnPropertyChanged(nameof(LastName));
+                }
+            }
+        }
+        // ................................
+        private string phone;
+
+        public string Phone
+        {
+            get { return phone; }
+            set
+            {
+                if (phone != value)
+                {
+                    phone = value;
+                    OnPropertyChanged(nameof(Phone));
+                }
+            }
+        }
+        // ................................
+        private string address;
+
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                if (address != value)
+                {
+                    address = value;
+                    OnPropertyChanged(nameof(Address));
                 }
             }
         }
@@ -52,10 +113,11 @@ namespace School_Bus.ViewModels
             ShowRemoveDriverViewCommand = new ViewModelCommand(ExecuteShowRemoveDriverViewCommand);
             ShowAddDriverViewCommand= new ViewModelCommand(ExecuteShowAddDriverViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+            AddCommand = new ViewModelCommand(ExecuteAddCommand);
 
 
 
-            //DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
+            DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
         }
 
         public void ExecuteShowRemoveDriverViewCommand(object? parameter)
@@ -117,6 +179,18 @@ namespace School_Bus.ViewModels
                 DriverList.Clear();
                 DriverList.Add(new DriverDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Address = result.Address , Phone = result.Phone });
             }
+        }
+
+        public void ExecuteAddCommand(object parameter)
+        {
+            Driver new_class = new Driver() { FirstName = FirstName, LastName = LastName , Phone = Phone , Address = Address };
+
+            repository.Add(new_class);
+            repository.SaveChanges();
+
+            DriverList.Add(new DriverDTO() { Id = new_class.Id,  Firstname = new_class.FirstName, Lastname = new_class.LastName , Address = new_class.Address , Phone=new_class.Phone });
+
+            inputwindow.Close();
         }
     }
 }

@@ -11,21 +11,25 @@ using Entity.Concrete;
 using Context.Contexts;
 using Entity.DTO;
 using Context.Repositories.Concrete;
+using System.Threading;
+using System.Collections.Specialized;
 
 namespace School_Bus.ViewModels
 {
-    public class ClassViewModel:BaseViewModel
+    public class ClassViewModel : BaseViewModel
     {
         public Repository<Class> repository = new Repository<Class>();
         public ICommand ShowRemoveClassViewCommand { get; }
         public ICommand ShowAddClassViewCommand { get; }
         public ICommand SearchCommand { get; }
 
+        public ICommand AddCommand { get; }
+
         public static Window inputWindow;
         public static Window outputWindow;
 
-        private ObservableCollection<ClassDTO> classlist;
-        public ObservableCollection<ClassDTO> ClassList
+        private List<ClassDTO> classlist;
+        public List<ClassDTO> ClassList
         {
             get { return classlist; }
             set
@@ -50,15 +54,29 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private string classname;
+
+        public string ClassName
+        {
+            get { return classname; }
+            set
+            {
+                if (classname != value)
+                {
+                    classname = value;
+                    OnPropertyChanged(nameof(ClassName));
+                }
+            }
+        }
 
         public ClassViewModel()
         {
             ShowRemoveClassViewCommand = new ViewModelCommand(ExecuteShowRemoveClassViewCommand);
             ShowAddClassViewCommand = new ViewModelCommand(ExecuteShowAddClassViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
+            AddCommand = new ViewModelCommand(ExecuteAddCommand);
 
-
-            //ClassList = new ObservableCollection<ClassDTO>(repository.Classes());
+            ClassList = new List<ClassDTO>(repository.Classes());
         }
 
         public void ExecuteShowRemoveClassViewCommand(object parameter)
@@ -121,6 +139,21 @@ namespace School_Bus.ViewModels
                 ClassList.Clear();
                 ClassList.Add(new ClassDTO() { Id = result.Id, Name = result.Name });
             }
+        }
+
+        public void ExecuteAddCommand(object parameter)
+        {
+
+            Class new_class = new Class() { Name = ClassName };
+
+            repository.Add(new_class);
+            repository.SaveChanges();
+
+
+            ClassList = new List<ClassDTO>(repository.Classes());
+
+            inputWindow.Close();
+
         }
     }
 }

@@ -70,7 +70,7 @@
             <DataGrid ColumnWidth="*"
               Background="Transparent"
               BorderThickness="0"
-                      ItemsSource="{Binding StudentList}">
+                      ItemsSource="{Binding StudentList,NotifyOnSourceUpdated=True}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>

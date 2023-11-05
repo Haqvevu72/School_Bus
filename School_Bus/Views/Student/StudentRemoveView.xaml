@@ -4,10 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:School_Bus.Views.Student"
+             xmlns:local="clr-namespace:School_Bus.Views.Student" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#F9B572">
+
+    <UserControl.DataContext>
+        <viewmodel:StudentViewModel/>
+    </UserControl.DataContext>
+
+        <Grid Background="#F9B572">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
@@ -38,8 +43,10 @@
 
             </TextBlock>
             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-          Margin="0 10 0 0"
-          Background="LightYellow"></ComboBox>
+                      Margin="0 10 0 0"
+                      Background="LightYellow"
+                      ItemsSource="{Binding IdList}"
+                      SelectedItem="{Binding Id}"></ComboBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
            Text="Student Name"
@@ -50,7 +57,8 @@
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                Background="LightYellow"
                Height="50"
-               Margin="0 10 0 0"></TextBlock>
+               Margin="0 10 0 0"
+                       Text="{Binding FirstName}"></TextBlock>
 
 
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
@@ -62,16 +70,28 @@
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                Background="LightYellow"
                Height="50"
-               Margin="0 10 0 0"></TextBlock>
+               Margin="0 10 0 0"
+                       Text="{Binding LastName}"></TextBlock>
 
-
-            <Button Width="100"
+            <StackPanel Orientation="Horizontal">
+                <Button Width="100"
         Margin="0 20 0 0"
+        Content="Find"
+        Foreground="LightYellow"
+        FontWeight="Bold"
+                    Command="{Binding FindCommand}">
+
+                </Button>
+                <Button Width="100"
+        Margin="90 20 0 0"
         Content="Remove"
         Foreground="LightYellow"
-        FontWeight="Bold">
-
-            </Button>
+        FontWeight="Bold"
+                    Command="{Binding RemoveCommand}"
+                        >
+                    
+                </Button>
+            </StackPanel>
         </StackPanel>
 
 

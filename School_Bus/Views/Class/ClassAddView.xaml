@@ -10,7 +10,7 @@
       d:DesignHeight="300" d:DesignWidth="400"
       Title="ClassAddView">
     <Page.DataContext>
-        <viewmodel:ClassAddViewModel/>
+        <viewmodel:ClassViewModel/>
     </Page.DataContext>
     
     <Grid Background="#F9B572">

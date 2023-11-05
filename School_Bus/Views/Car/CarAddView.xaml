@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <viewmodel:CarAddViewModel/>
+        <viewmodel:CarViewModel/>
     </UserControl.DataContext>
     <Grid Background="#F9B572">
         <Grid.RowDefinitions>
