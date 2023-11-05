@@ -3,6 +3,7 @@ using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Driver;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
@@ -18,7 +19,9 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveDriverViewCommand { get; set; }
         public ICommand ShowAddDriverViewCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand FindCommand { get; set; }
 
+        public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
         private string id;
@@ -108,13 +111,25 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private List<int> idlist;
+        public List<int> IdList
+        {
+            get { return idlist; }
+            set
+            {
+                idlist = value;
+                OnPropertyChanged(nameof(IdList)); // Notify property change
+            }
+        }
+
         public DriverViewModel()
         {
             ShowRemoveDriverViewCommand = new ViewModelCommand(ExecuteShowRemoveDriverViewCommand);
             ShowAddDriverViewCommand= new ViewModelCommand(ExecuteShowAddDriverViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
-
+            FindCommand = new ViewModelCommand(ExecuteFindCommand);
+            RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
 
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
@@ -191,6 +206,25 @@ namespace School_Bus.ViewModels
             DriverList.Add(new DriverDTO() { Id = new_class.Id,  Firstname = new_class.FirstName, Lastname = new_class.LastName , Address = new_class.Address , Phone=new_class.Phone });
 
             inputwindow.Close();
+        }
+
+        private Driver current;
+        public void ExecuteFindCommand(object parameter)
+        {
+            current = repository.GetById(Convert.ToInt32(Id));
+
+            FirstName = current.FirstName;
+            LastName = current.LastName;
+        }
+
+        public void ExecuteRemoveCommand(object parameter)
+        {
+            repository.Delete(current);
+            repository.SaveChanges();
+            IdList = new List<int>(repository.GetStudentId());
+
+            FirstName = null;
+            LastName = null;
         }
     }
 }

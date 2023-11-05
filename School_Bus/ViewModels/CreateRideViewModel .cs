@@ -1,4 +1,6 @@
 ﻿
+using Context.Repositories.Concrete;
+using Entity.Concrete;
 using System.Windows;
 using System.Windows.Input;
 
@@ -87,7 +89,10 @@ namespace School_Bus.ViewModels
 
                 public void ExecuteAddCommand(object parameter)
                 {
-                    MessageBox.Show(BusId.ToString()+'\n'+StartPoint+'\n'+EndPoint+'\n'+Passengers.ToString());
+                    Ride new_class = new Ride() { BusId = BusId , StartPoint = StartPoint , EndPoint = EndPoint , Passengers = Passengers };
+                    Repository<Ride> repository = new Repository<Ride>();
+                    repository.Add(new_class);
+                    repository.SaveChanges();
                 }
     }
 }

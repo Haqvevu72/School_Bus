@@ -3,6 +3,7 @@ using Entity.Concrete;
 using Entity.DTO;
 using School_Bus.Views.Parent;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
@@ -19,7 +20,9 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveParentViewCommand { get; }
         public ICommand ShowAddParentViewCommand { get; }
         public ICommand SearchCommand { get; set; }
+        public ICommand FindCommand { get; set; }
 
+        public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
 
@@ -110,12 +113,25 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private List<int> idlist;
+        public List<int> IdList
+        {
+            get { return idlist; }
+            set
+            {
+                idlist = value;
+                OnPropertyChanged(nameof(IdList)); // Notify property change
+            }
+        }
+
         public ParentViewModel()
         {
             ShowRemoveParentViewCommand = new ViewModelCommand(ExecuteShowRemoveParentViewCommand);
             ShowAddParentViewCommand = new ViewModelCommand(ExecuteShowAddParentViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
+            FindCommand = new ViewModelCommand(ExecuteFindCommand);
+            RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
             ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
         }
@@ -193,6 +209,25 @@ namespace School_Bus.ViewModels
 
             inputwindow.Close();
         }
-        
+
+        private Parent current;
+        public void ExecuteFindCommand(object parameter)
+        {
+            current = repository.GetById(Convert.ToInt32(Id));
+
+            FirstName = current.FirstName;
+            LastName = current.LastName;
+        }
+
+        public void ExecuteRemoveCommand(object parameter)
+        {
+            repository.Delete(current);
+            repository.SaveChanges();
+            IdList = new List<int>(repository.GetStudentId());
+
+            FirstName = null;
+            LastName = null;
+        }
+
     }
 }

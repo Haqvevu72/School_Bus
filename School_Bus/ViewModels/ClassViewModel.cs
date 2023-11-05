@@ -22,7 +22,8 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveClassViewCommand { get; }
         public ICommand ShowAddClassViewCommand { get; }
         public ICommand SearchCommand { get; }
-
+        public ICommand FindCommand { get; set; }
+        public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; }
 
         public static Window inputWindow;
@@ -36,6 +37,17 @@ namespace School_Bus.ViewModels
             {
                 classlist = value;
                 OnPropertyChanged(nameof(ClassList)); // Notify property change
+            }
+        }
+
+        private List<int> idlist;
+        public List<int> IdList
+        {
+            get { return idlist; }
+            set
+            {
+                idlist = value;
+                OnPropertyChanged(nameof(IdList)); // Notify property change
             }
         }
 
@@ -75,7 +87,8 @@ namespace School_Bus.ViewModels
             ShowAddClassViewCommand = new ViewModelCommand(ExecuteShowAddClassViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
-
+            FindCommand = new ViewModelCommand(ExecuteFindCommand);
+            RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             ClassList = new List<ClassDTO>(repository.Classes());
         }
 
@@ -153,6 +166,24 @@ namespace School_Bus.ViewModels
             ClassList = new List<ClassDTO>(repository.Classes());
 
             inputWindow.Close();
+
+        }
+
+        private Class current;
+        public void ExecuteFindCommand(object parameter)
+        {
+            current = repository.GetById(Convert.ToInt32(Id));
+
+            ClassName = current.Name;
+        }
+
+        public void ExecuteRemoveCommand(object parameter)
+        {
+            repository.Delete(current);
+            repository.SaveChanges();
+            IdList = new List<int>(repository.GetStudentId());
+
+            ClassName = null;
 
         }
     }
