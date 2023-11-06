@@ -23,7 +23,7 @@ namespace School_Bus.ViewModels
         public ICommand ShowRemoveRidesViewCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand FindCommand { get; set; }
-
+        public ICommand AddCommand { get; set; }    
         public ICommand RemoveCommand { get; set; }
 
         private ObservableCollection<RideDTO> ridelist;
@@ -64,6 +64,36 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private string busid;
+
+        public string BusId
+        {
+            get { return busid; }
+            set
+            {
+                if (busid != value)
+                {
+                    busid = value;
+                    OnPropertyChanged(nameof(BusId));
+                }
+            }
+        }
+
+        private string passengers;
+
+        public string Passengers
+        {
+            get { return passengers; }
+            set
+            {
+                if (passengers != value)
+                {
+                    passengers = value;
+                    OnPropertyChanged(nameof(Passengers));
+                }
+            }
+        }
+
         private string startpoint;
 
         public string StartPoint
@@ -94,14 +124,17 @@ namespace School_Bus.ViewModels
             }
         }
 
+
         public RidesViewModel()
         {
             ShowRemoveRidesViewCommand = new ViewModelCommand(ExecuteShowRemoveRidesViewCommand);
             SearchCommand = new ViewModelCommand(ExecuteSearchCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            AddCommand = new ViewModelCommand(ExecuteAddCommand);
 
-            //RideList = new ObservableCollection<RideDTO>(repository.Rides());
+            RideList = new ObservableCollection<RideDTO>(repository.Rides());
+            IdList = new List<int>(repository.GetRideId());
         }
 
         public void ExecuteShowRemoveRidesViewCommand(object? parameter)
@@ -153,10 +186,31 @@ namespace School_Bus.ViewModels
         {
             repository.Delete(current);
             repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            IdList = new List<int>(repository.GetRideId());
 
             StartPoint = null;
             EndPoint = null;
+        }
+        public void ExecuteAddCommand(object parameter) 
+        {
+            try
+            {
+                Ride new_ride = new Ride() { BusId = Convert.ToInt32(BusId), StartPoint = StartPoint, EndPoint = EndPoint, Passengers = Convert.ToInt32(Passengers) };
+
+                repository.Add(new_ride);
+                repository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can not add duplicate value", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally 
+            {
+                BusId = null;
+                StartPoint = null;
+                EndPoint = null;
+                Passengers = null;
+            }
         }
     }
 }

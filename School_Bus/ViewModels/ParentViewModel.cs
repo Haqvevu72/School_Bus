@@ -134,6 +134,7 @@ namespace School_Bus.ViewModels
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
             ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
+            IdList = IdList = new List<int>(repository.GetParentId());
         }
 
         public void ExecuteShowRemoveParentViewCommand(object? parameter)
@@ -223,7 +224,7 @@ namespace School_Bus.ViewModels
         {
             repository.Delete(current);
             repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            IdList = new List<int>(repository.GetParentId());
 
             FirstName = null;
             LastName = null;

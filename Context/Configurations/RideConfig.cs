@@ -10,10 +10,10 @@ namespace Context.Configurations
         {
             // Relationships
 
-                // {Bus - Ride}  => {One To One}
-                builder.HasOne(r => r.Car)
-                       .WithOne(b => b.Ride)
-                       .HasForeignKey<Ride>(r => r.BusId);
+            // {Bus - Ride}  => {One To One}
+            builder.HasOne(r => r.Car)
+                   .WithOne(b => b.Ride)
+                   .HasForeignKey<Ride>(r => r.BusId);
 
             // Has Data
 

@@ -69,7 +69,8 @@
             <DataGrid ColumnWidth="*"
                   Background="Transparent"
                   BorderThickness="0"
-                  ItemsSource="{Binding ParentList}">
+                  ItemsSource="{Binding ParentList}"
+                  AutoGenerateColumns="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -79,6 +80,24 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Firstname}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Lastname}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" IsReadOnly="False" />
+                    
+                    
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Update" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>

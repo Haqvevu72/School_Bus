@@ -17,7 +17,7 @@ namespace Context.Configurations
                        .WithOne(d => d.Car)
                        .HasForeignKey<Car>(c => c.DriverId);
 
-            // Constraints
+            // Has Data
 
                 builder.HasData(
                     new Car() { Id = 1, DriverId = 1, Capacity = 20, Number = "01-AA-001", Created = DateTime.Now, Updated = DateTime.Now },
@@ -31,6 +31,12 @@ namespace Context.Configurations
                     new Car() { Id = 9, DriverId = 9, Capacity = 19, Number = "09-II-009", Created = DateTime.Now, Updated = DateTime.Now },
                     new Car() { Id = 10, DriverId = 10, Capacity = 15, Number = "10-JJ-010", Created = DateTime.Now, Updated = DateTime.Now }
                     );
+
+            // Constraint
+
+            builder
+                    .HasIndex(x => x.Number)
+                    .IsUnique();
 
 
 

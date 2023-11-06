@@ -63,7 +63,8 @@
             <DataGrid ColumnWidth="*"
           Background="Transparent"
           BorderThickness="0"
-                      ItemsSource="{Binding RideList}">
+                      ItemsSource="{Binding RideList}"
+                      AutoGenerateColumns="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -73,6 +74,24 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Bus Id" Binding="{Binding BusId}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Start Point" Binding="{Binding StartPoint}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="End Point" Binding="{Binding EndPoint}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Passengers" Binding="{Binding Passengers}" IsReadOnly="False" />
+
+
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Update" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </Border>
     </Grid>

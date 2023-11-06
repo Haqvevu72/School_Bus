@@ -117,7 +117,8 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
-            //CarList = new ObservableCollection<CarDTO>(repository.Cars());
+            IdList = new List<int>(repository.GetCarId());
+            CarList = new ObservableCollection<CarDTO>(repository.Cars());
         }
 
         public void ExecuteShowCarRemoveViewCommand(object? parameter)
@@ -213,7 +214,7 @@ namespace School_Bus.ViewModels
         {
             repository.Delete(current);
             repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            IdList = new List<int>(repository.GetCarId());
             Number = null;
         }
     }

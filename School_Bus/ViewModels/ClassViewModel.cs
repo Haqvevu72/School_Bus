@@ -13,6 +13,7 @@ using Entity.DTO;
 using Context.Repositories.Concrete;
 using System.Threading;
 using System.Collections.Specialized;
+using System.Windows.Controls;
 
 namespace School_Bus.ViewModels
 {
@@ -25,6 +26,7 @@ namespace School_Bus.ViewModels
         public ICommand FindCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; }
+        public ICommand UpdateCommand { get; set; }
 
         public static Window inputWindow;
         public static Window outputWindow;
@@ -89,6 +91,9 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
+
+            IdList = new List<int>(repository.GetClassId());
             ClassList = new List<ClassDTO>(repository.Classes());
         }
 
@@ -181,10 +186,16 @@ namespace School_Bus.ViewModels
         {
             repository.Delete(current);
             repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            IdList = new List<int>(repository.GetClassId());
 
             ClassName = null;
 
+        }
+        public void ExecuteUpdateCommand(object parameter)
+        { 
+            Class update = repository.GetById(Convert.ToInt32(Id));
+            repository.Update(update);
+            repository.SaveChanges();
         }
     }
 }

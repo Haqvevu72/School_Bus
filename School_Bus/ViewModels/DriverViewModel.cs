@@ -131,7 +131,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
-
+            IdList = new List<int>(repository.GetDriverId());
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
         }
 
@@ -221,7 +221,7 @@ namespace School_Bus.ViewModels
         {
             repository.Delete(current);
             repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            IdList = new List<int>(repository.GetRideId());
 
             FirstName = null;
             LastName = null;

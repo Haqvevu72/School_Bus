@@ -70,7 +70,8 @@
             <DataGrid ColumnWidth="*"
               Background="Transparent"
               BorderThickness="0"
-              ItemsSource="{Binding CarList}">
+              ItemsSource="{Binding CarList}"
+              AutoGenerateColumns="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -81,23 +82,23 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <!-- Define your existing columns here -->
-                    <!-- For example: -->
-                    <DataGridTextColumn Header="Make" Binding="{Binding Make}" />
-                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Driver Id" Binding="{Binding DriverId}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Number" Binding="{Binding Number}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}" IsReadOnly="False" />
+                    
                     <DataGridTemplateColumn Header="Action">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <!-- Add the button inside the row's content -->
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Click Me" Click="Button_Click" />
+                                    <Button Content="Update" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
       
-            In this code, we've wrapped the button inside a StackPanel within the DataTemplate. This will ensure that a button appears in each row of the DataGrid, along with your existing columns. You can customize the button's appearance and handle its click event in your code-behind.
+            
 
 
 
