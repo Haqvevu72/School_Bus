@@ -14,6 +14,8 @@ using Context.Repositories.Concrete;
 using System.Threading;
 using System.Collections.Specialized;
 using System.Windows.Controls;
+using FontAwesome.Sharp;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace School_Bus.ViewModels
 {
@@ -31,16 +33,9 @@ namespace School_Bus.ViewModels
         public static Window inputWindow;
         public static Window outputWindow;
 
-        private List<ClassDTO> classlist;
-        public List<ClassDTO> ClassList
-        {
-            get { return classlist; }
-            set
-            {
-                classlist = value;
-                OnPropertyChanged(nameof(ClassList)); // Notify property change
-            }
-        }
+
+        public ObservableCollection<ClassDTO> ClassList { get; set; }
+
 
         private List<int> idlist;
         public List<int> IdList
@@ -83,6 +78,21 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private ClassDTO classDTO;
+
+        public ClassDTO ClassDTO
+        {
+            get { return classDTO; }
+            set
+            {
+                if (classDTO != value)
+                {
+                    classDTO = value;
+                    OnPropertyChanged(nameof(ClassDTO));
+                }
+            }
+        }
+
         public ClassViewModel()
         {
             ShowRemoveClassViewCommand = new ViewModelCommand(ExecuteShowRemoveClassViewCommand);
@@ -94,7 +104,7 @@ namespace School_Bus.ViewModels
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
 
             IdList = new List<int>(repository.GetClassId());
-            ClassList = new List<ClassDTO>(repository.Classes());
+            ClassList = repository.Classes();
         }
 
         public void ExecuteShowRemoveClassViewCommand(object parameter)
@@ -167,8 +177,8 @@ namespace School_Bus.ViewModels
             repository.Add(new_class);
             repository.SaveChanges();
 
-
-            ClassList = new List<ClassDTO>(repository.Classes());
+            
+            ClassList.Add(new ClassDTO() { Id = new_class.Id, Name = new_class.Name });
 
             inputWindow.Close();
 
@@ -193,9 +203,11 @@ namespace School_Bus.ViewModels
         }
         public void ExecuteUpdateCommand(object parameter)
         { 
-            Class update = repository.GetById(Convert.ToInt32(Id));
+            Class update = repository.GetById(ClassDTO.Id);
             repository.Update(update);
             repository.SaveChanges();
+            ClassList = null;
+            ClassList = repository.Classes();
         }
     }
 }

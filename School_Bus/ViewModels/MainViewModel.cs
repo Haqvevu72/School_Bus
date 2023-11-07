@@ -49,7 +49,7 @@ namespace School_Bus.ViewModels
         public ICommand ShowParentViewCommand { get;}
         public ICommand ShowCreateRideCommand { get;} 
         public ICommand ShowStudentCommand    { get;} 
-        public ICommand ShowClassCommand      { get;}
+        public ICommand ShowClassCommand      { get; set; }
         public ICommand ShowRidesCommand      { get;}
         public ICommand ShowDriverCommand { get; }
         public ICommand ShowCarCommand { get; }

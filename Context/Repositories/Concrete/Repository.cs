@@ -5,6 +5,7 @@ using Entity.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,15 +90,15 @@ public class Repository<T> : IBaseRepository<T> where T : BaseEntity, new()
 
 
 
-    public List<RideDTO> Rides()
+    public ObservableCollection<RideDTO> Rides()
     {
-        List<RideDTO> rideDTO = new List<RideDTO>(schoolBusDB.Rides.Select(r => new RideDTO() { Id = r.Id, BusId = r.BusId , StartPoint=r.StartPoint , EndPoint=r.EndPoint,Passengers = r.Passengers}));
+        ObservableCollection<RideDTO> rideDTO = new ObservableCollection<RideDTO>(schoolBusDB.Rides.Select(r => new RideDTO() { Id = r.Id, BusId = r.BusId , StartPoint=r.StartPoint , EndPoint=r.EndPoint,Passengers = r.Passengers}));
         return rideDTO;
     }
 
-    public List<ClassDTO> Classes() 
+    public ObservableCollection<ClassDTO> Classes() 
     {
-        List<ClassDTO> classDTO = new List<ClassDTO>(schoolBusDB.Classes.Select(c => new ClassDTO() { Id = c.Id, Name = c.Name }));
+        ObservableCollection<ClassDTO> classDTO = new ObservableCollection<ClassDTO>(schoolBusDB.Classes.Select(c => new ClassDTO() { Id = c.Id, Name = c.Name }));
         return classDTO;
     }
 
