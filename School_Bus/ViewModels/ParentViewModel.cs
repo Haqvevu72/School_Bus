@@ -21,7 +21,7 @@ namespace School_Bus.ViewModels
         public ICommand ShowAddParentViewCommand { get; }
         public ICommand SearchCommand { get; set; }
         public ICommand FindCommand { get; set; }
-
+        public ICommand UpdateCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
@@ -124,6 +124,19 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private ParentDTO parentDTO;
+
+        public ParentDTO ParentDTO
+        {
+            get { return parentDTO; }
+            set 
+            { 
+                parentDTO = value; 
+                OnPropertyChanged(nameof(ParentDTO));
+            }
+        }
+
+
         public ParentViewModel()
         {
             ShowRemoveParentViewCommand = new ViewModelCommand(ExecuteShowRemoveParentViewCommand);
@@ -132,9 +145,10 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
 
-            //ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
-            //IdList = IdList = new List<int>(repository.GetParentId());
+            ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
+            IdList = IdList = new List<int>(repository.GetParentId());
         }
 
         public void ExecuteShowRemoveParentViewCommand(object? parameter)
@@ -228,6 +242,12 @@ namespace School_Bus.ViewModels
 
             FirstName = null;
             LastName = null;
+        }
+        public void ExecuteUpdateCommand(object parameter)
+        {
+            Parent update = repository.GetById(ParentDTO.Id);
+            repository.Update(update);
+            repository.SaveChanges();
         }
 
     }

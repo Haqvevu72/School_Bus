@@ -19,12 +19,10 @@ namespace School_Bus.ViewModels
         public ICommand ShowAddStudentViewCommand { get; }
         public ICommand ShowRemoveStudentViewCommand { get; }
         public ICommand SearchCommand { get; }
-
         public ICommand AddCommand { get; set; }
-
         public ICommand FindCommand { get; set; }
-
         public ICommand RemoveCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         Repository<Student> repository = new Repository<Student>();
 
@@ -142,6 +140,19 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private StudentDTO studentDTO;
+
+        public StudentDTO StudentDTO
+        {
+            get { return studentDTO; }
+            set 
+            { 
+                studentDTO = value; 
+                OnPropertyChanged(nameof(StudentDTO));
+            }
+        }
+
+
         public StudentViewModel()
         {
             ShowAddStudentViewCommand = new ViewModelCommand(ExecuteShowAddStudentViewCommand);
@@ -150,6 +161,7 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
 
             StudentList = new ObservableCollection<StudentDTO>(repository.Students());
             IdList = new List<int>(repository.GetStudentId());
@@ -246,6 +258,12 @@ namespace School_Bus.ViewModels
 
             FirstName =null;
             LastName = null;
+        }
+        public void ExecuteUpdateCommand(object parameter)
+        {
+            Student update = repository.GetById(StudentDTO.Id);
+            repository.Update(update);
+            repository.SaveChanges();
         }
     }
 }

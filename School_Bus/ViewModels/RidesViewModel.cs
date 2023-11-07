@@ -25,6 +25,7 @@ namespace School_Bus.ViewModels
         public ICommand FindCommand { get; set; }
         public ICommand AddCommand { get; set; }    
         public ICommand RemoveCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         private ObservableCollection<RideDTO> ridelist;
         public ObservableCollection<RideDTO> RideList
@@ -124,6 +125,19 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private RideDTO rideDTO;
+
+        public RideDTO RideDTO
+        {
+            get { return rideDTO; }
+            set 
+            { 
+                rideDTO = value; 
+                OnPropertyChanged(nameof(RideDTO));
+            }
+        }
+
+
 
         public RidesViewModel()
         {
@@ -132,6 +146,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
 
             //RideList = new ObservableCollection<RideDTO>(repository.Rides());
             //IdList = new List<int>(repository.GetRideId());
@@ -211,6 +226,12 @@ namespace School_Bus.ViewModels
                 EndPoint = null;
                 Passengers = null;
             }
+        }
+        public void ExecuteUpdateCommand(object parameter)
+        {
+            Ride update = repository.GetById(RideDTO.Id);
+            repository.Update(update);
+            repository.SaveChanges();
         }
     }
 }

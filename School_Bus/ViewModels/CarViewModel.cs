@@ -22,6 +22,7 @@ namespace School_Bus.ViewModels
         public ICommand SearchCommand { get; }
         public ICommand FindCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         private string id;
 
@@ -109,6 +110,19 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private CarDTO carDTO;
+
+        public CarDTO CarDTO
+        {
+            get { return carDTO; }
+            set 
+            { 
+                carDTO = value; 
+                OnPropertyChanged(nameof(CarDTO));
+            }
+        }
+
+
         public CarViewModel()
         {
             ShowCarAddViewCommand = new ViewModelCommand(ExecuteShowCarAddViewCommand);
@@ -117,6 +131,8 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
+
             IdList = new List<int>(repository.GetCarId());
             CarList = new ObservableCollection<CarDTO>(repository.Cars());
         }
@@ -216,6 +232,13 @@ namespace School_Bus.ViewModels
             repository.SaveChanges();
             IdList = new List<int>(repository.GetCarId());
             Number = null;
+        }
+
+        public void ExecuteUpdateCommand(object parameter)
+        {
+            Car update = repository.GetById(CarDTO.Id);
+            repository.Update(update);
+            repository.SaveChanges();
         }
     }
 }

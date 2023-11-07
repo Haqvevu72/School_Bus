@@ -69,8 +69,9 @@
                 <DataGrid ColumnWidth="*"
                           Background="Transparent"
                           BorderThickness="0"
-                          ItemsSource="{Binding CarList}"
-                          AutoGenerateColumns="False">
+                          ItemsSource="{Binding CarList,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                          AutoGenerateColumns="False"
+                          SelectedItem="{Binding CarDTO ,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -82,10 +83,10 @@
                     </DataGrid.ColumnHeaderStyle>
                     
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
-                        <DataGridTextColumn Header="Driver Id" Binding="{Binding DriverId}" IsReadOnly="False" />
-                        <DataGridTextColumn Header="Number" Binding="{Binding Number}" IsReadOnly="False" />
-                        <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Driver Id" Binding="{Binding DriverId, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Number" Binding="{Binding Number,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
                     
                     <DataGridTemplateColumn Header="Action">
                         <DataGridTemplateColumn.CellTemplate>

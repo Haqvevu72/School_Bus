@@ -20,7 +20,7 @@ namespace School_Bus.ViewModels
         public ICommand ShowAddDriverViewCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand FindCommand { get; set; }
-
+        public ICommand UpdateCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
@@ -122,6 +122,19 @@ namespace School_Bus.ViewModels
             }
         }
 
+        private DriverDTO driverDTO;
+
+        public DriverDTO DriverDTO
+        {
+            get { return driverDTO; }
+            set 
+            { 
+                driverDTO = value; 
+                OnPropertyChanged($"{nameof(DriverDTO)}");
+            }
+        }
+
+
         public DriverViewModel()
         {
             ShowRemoveDriverViewCommand = new ViewModelCommand(ExecuteShowRemoveDriverViewCommand);
@@ -130,6 +143,7 @@ namespace School_Bus.ViewModels
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
 
             IdList = new List<int>(repository.GetDriverId());
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
@@ -225,6 +239,13 @@ namespace School_Bus.ViewModels
 
             FirstName = null;
             LastName = null;
+        }
+
+        public void ExecuteUpdateCommand(object parameter)
+        {
+            Driver update = repository.GetById(DriverDTO.Id);
+            repository.Update(update);
+            repository.SaveChanges();
         }
     }
 }

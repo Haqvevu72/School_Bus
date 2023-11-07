@@ -61,10 +61,11 @@
         CornerRadius="10" 
         Padding="10">
             <DataGrid ColumnWidth="*"
-          Background="Transparent"
-          BorderThickness="0"
-                      ItemsSource="{Binding RideList}"
-                      AutoGenerateColumns="False">
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ItemsSource="{Binding RideList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding RideDTO,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -75,11 +76,11 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Bus Id" Binding="{Binding BusId}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Start Point" Binding="{Binding StartPoint}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="End Point" Binding="{Binding EndPoint}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Passengers" Binding="{Binding Passengers}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Bus Id" Binding="{Binding BusId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Start Point" Binding="{Binding StartPoint,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="End Point" Binding="{Binding EndPoint,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Passengers" Binding="{Binding Passengers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
 
 
                     <DataGridTemplateColumn Header="Action">

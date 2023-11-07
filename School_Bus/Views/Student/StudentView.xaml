@@ -70,8 +70,9 @@
             <DataGrid ColumnWidth="*"
               Background="Transparent"
               BorderThickness="0"
-              ItemsSource="{Binding StudentList}"
-              AutoGenerateColumns="False">
+              ItemsSource="{Binding StudentList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding StudentDTO,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -82,12 +83,12 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Firstname}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Surname" Binding="{Binding Lastname}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Class Id" Binding="{Binding ClassId}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Bus Id" Binding="{Binding BusId}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Parent Id" Binding="{Binding ParentId}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Firstname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Lastname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Class Id" Binding="{Binding ClassId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Bus Id" Binding="{Binding BusId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Parent Id" Binding="{Binding ParentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
                     
                     
                     

@@ -70,8 +70,9 @@
             <DataGrid ColumnWidth="*"
                       Background="Transparent"
                       BorderThickness="0"
-                      ItemsSource="{Binding DriverList}"
-                      AutoGenerateColumns="False">
+                      ItemsSource="{Binding DriverList ,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding DriverDTO ,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -82,11 +83,11 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Firstname}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Surname" Binding="{Binding Lastname}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="False" />
-                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Firstname,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Lastname,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" />
                     <DataGridTemplateColumn Header="Action">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

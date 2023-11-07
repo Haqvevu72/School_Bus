@@ -206,8 +206,6 @@ namespace School_Bus.ViewModels
             Class update = repository.GetById(ClassDTO.Id);
             repository.Update(update);
             repository.SaveChanges();
-            ClassList = null;
-            ClassList = repository.Classes();
         }
     }
 }
