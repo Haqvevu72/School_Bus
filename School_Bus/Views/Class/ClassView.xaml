@@ -69,10 +69,10 @@
               Background="Transparent"
               BorderThickness="0"
               Name="Classes"
-              ItemsSource="{Binding ClassList, UpdateSourceTrigger=PropertyChanged}"
+              ItemsSource="{Binding ClassList, UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"
                       AutoGenerateColumns="False"
 
-              SelectedItem="{Binding ClassDTO}">
+              SelectedItem="{Binding ClassDTO , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -83,8 +83,8 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="False" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}" IsReadOnly="False" />
                     <DataGridTemplateColumn Header="Action">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
