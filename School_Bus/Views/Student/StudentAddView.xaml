@@ -6,12 +6,12 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:School_Bus.Views.Student" xmlns:viewmodel="clr-namespace:School_Bus.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" BorderThickness="7" BorderBrush="Brown">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <viewmodel:StudentViewModel/>
     </UserControl.DataContext>
     
-    <Grid Background="#F9B572">
+    <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
@@ -38,13 +38,13 @@
         <StackPanel Grid.Row="1"
                     >
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                        Text="Firstname"
                        Margin="10 0 0 0"
                        FontSize="16"
                        FontWeight="Bold"></TextBlock>
 
             <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                     Background="LightYellow"
                      Width="300"
                      HorizontalAlignment="Left"
                      Margin="10 0 0 0"
@@ -54,13 +54,13 @@
                      Text="{Binding FirstName}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                        Text="Lastname"
                        Margin="10 0 0 0"
                        FontSize="16"
                        FontWeight="Bold"></TextBlock>
 
             <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                     Background="LightYellow"
                      Width="300"
                      HorizontalAlignment="Left"
                      Margin="10 0 0 0"
@@ -70,13 +70,13 @@
                      Text="{Binding LastName}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                        Text="Class Id"
                        Margin="10 0 0 0"
                        FontSize="16"
                        FontWeight="Bold"></TextBlock>
 
             <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                     Background="LightYellow"
                      Width="300"
                      HorizontalAlignment="Left"
                      Margin="10 0 0 0"
@@ -86,13 +86,13 @@
                      Text="{Binding ClassId}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                        Text="Parent Id"
                        Margin="10 0 0 0"
                        FontSize="16"
                        FontWeight="Bold"></TextBlock>
 
             <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                     Background="LightYellow"
                      Width="300"
                      HorizontalAlignment="Left"
                      Margin="10 0 0 0"
@@ -104,13 +104,13 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                        Text="Bus Id"
                        Margin="10 0 0 0"
                        FontSize="16"
                        FontWeight="Bold"></TextBlock>
 
             <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                     Background="LightYellow"
                      Width="300"
                      HorizontalAlignment="Left"
                      Margin="10 0 0 0"

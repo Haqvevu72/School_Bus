@@ -10,92 +10,67 @@
     <UserControl.DataContext>
         <viewmodel:DriverViewModel/>
     </UserControl.DataContext>
-    <Grid Background="#F9B572">
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="7*"></RowDefinition>
-            <!--<RowDefinition></RowDefinition>-->
-        </Grid.RowDefinitions>
 
-        <Button x:Name="btnClose"
+    <Grid Background="LightCyan">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1"
+                x:Name="btnClose"
                 Style="{StaticResource controlButton}"
                 Tag="{StaticResource color4}"
-               
+                Click="btnClose_Click"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0  0  0  20"
-                Click="btnClose_Click">
-            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
-        </Button>
-        <StackPanel Grid.Row="1"
-                Width="700"
-                Height="370">
+                VerticalAlignment="Top"
+                Margin="10">
+                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+            </Button>
 
-            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                   Text="Firstname"
-                   FontSize="20"
-                   Margin="0 0 110 0"
-                   HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
-                   Width="200"
-                   HorizontalAlignment="Center"
-                   Margin="0 5 0 0"
-                   FontSize="14"
-                   Foreground="Orange"
-                   FontWeight="Bold"
-                   Text="{Binding FirstName}"></TextBox>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 60 0 0">
+                    <StackPanel Margin="0 15 0 0">
+                        <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}" Foreground="Brown">FirstName</TextBlock>
+                        <TextBox Style="{StaticResource MaterialDesignTextBox}" Width="200"  Margin="0 10 0 0" Text="{Binding FirstName}"></TextBox>
+                    </StackPanel>
 
-            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                   Text="Lastname"
-                   FontSize="20"
-                   Margin="0 0 110 0"
-                   HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
-                   Width="200"
-                   HorizontalAlignment="Center"
-                   Margin="0 5 0 0"
-                   FontSize="14"
-                   Foreground="Orange"
-                   FontWeight="Bold"
-                   Text="{Binding LastName}"></TextBox>
+                    <StackPanel Margin="0 15 0 0">
+                        <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}" Foreground="Brown">Last Name</TextBlock>
+                        <TextBox Style="{StaticResource MaterialDesignTextBox}"  Width="200"  Margin="0 10 0 0" Text="{Binding LastName}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 60 0 0">
+                    <StackPanel Margin="0 15 0 0">
+                        <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}" Foreground="Brown">Phone</TextBlock>
+                        <TextBox Style="{StaticResource MaterialDesignTextBox}"  Width="200"  Margin="0 10 0 0" Text="{Binding Phone}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0 15 0 0">
+                        <TextBlock HorizontalAlignment="Center" Margin="0 0 150 0" Style="{StaticResource MaterialDesignButtonTextBlock}" Foreground="Brown">Address</TextBlock>
+                        <TextBox Style="{StaticResource MaterialDesignTextBox}"  Width="200"  Margin="0 10 0 0" Text="{Binding Address}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
 
-            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                   Text="Phone"
-                   FontSize="20"
-                   Margin="0 0 140 0"
-                   HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
-                   Width="200"
-                   HorizontalAlignment="Center"
-                   Margin="0 5 0 0"
-                   FontSize="14"
-                   Foreground="Orange"
-                   FontWeight="Bold"
-                   Text="{Binding Phone}"></TextBox>
-
-            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                   Text="Address"
-                   FontSize="20"
-                   Margin="0 0 120 0"
-                   HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
-                   Width="200"
-                   HorizontalAlignment="Center"
-                   Margin="0 5 0 0"
-                   FontSize="14"
-                   Foreground="Orange"
-                   FontWeight="Bold"
-                   Text="{Binding Address}"></TextBox>
-
-            <Button Name="btn_add"
-                Width="100"
-                Margin="0 10 0 0"
+        </Grid>
+        <Button Grid.Row="1" 
+                Grid.Column="1"
+                Margin="0 0 0 115"
                 Content="Add"
-                Command="{Binding AddCommand}"></Button>
-        </StackPanel>
+                Width="90"
+                Command="{Binding AddCommand}"/>
+        <!--
+
+
+
+
+</Button>-->
     </Grid>
 </UserControl>

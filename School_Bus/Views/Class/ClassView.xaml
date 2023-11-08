@@ -26,53 +26,48 @@
                     VerticalAlignment="Top"
                     Grid.Column="0">
                 <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="Orange"/>
-                <TextBox    
-                FontSize="13"
-                     Height="24"
-                       Width="300"
-                       Background="Transparent"
-                         FontWeight="Medium"
-                         FontFamily="Montserrat"                            
-                         Foreground="Purple"
-                         CaretBrush="Orange"
-                         BorderBrush="Orange"
-                         BorderThickness="0,0,0,1"                             
-                         VerticalContentAlignment="Center"
-                         Margin="5,5,0,0"
-                    Text="{Binding Id}"></TextBox>
+                <TextBox   FontSize="13"
+                           Height="24"
+                           Width="300"
+                           Background="Transparent"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"                            
+                           Foreground="Purple"
+                           CaretBrush="Orange"
+                           BorderBrush="Orange"
+                           BorderThickness="0,0,0,1"                             
+                           VerticalContentAlignment="Center"
+                           Margin="5,5,0,0"
+                           Text="{Binding Id}"></TextBox>
             </StackPanel>
             <Button Grid.Column="1"
-                Content="Search"
-                Command="{Binding SearchCommand}"
-                Style="{StaticResource parentButton}">
-            </Button>
-            <Button Name="btn_AddClass"
-                Grid.Column="2"
-                Content="Add Class"
-                Command="{Binding ShowAddClassViewCommand}"
-                Style="{StaticResource parentButton}"
-               >
+                    Content="Search"
+                    Command="{Binding SearchCommand}"
+                    Style="{StaticResource parentButton}"></Button>
 
-            </Button>
+            <Button Name="btn_AddClass"
+                   Grid.Column="2"
+                   Content="Add Class"
+                   Command="{Binding ShowAddClassViewCommand}"
+                  Style="{StaticResource parentButton}"></Button>
+
             <Button Grid.Column="3"
-                Content="Remove Class"
-                Command="{Binding ShowRemoveClassViewCommand}"
-                Style="{StaticResource parentButton}">
-            </Button>
+                    Content="Remove Class"
+                    Command="{Binding ShowRemoveClassViewCommand}"
+                    Style="{StaticResource parentButton}"></Button>
 
         </Grid>
         <Border Grid.Row="1"
-            Background="LightYellow"
-            CornerRadius="10" 
-            Padding="10">
+                Background="LightYellow"
+                CornerRadius="10" 
+                Padding="10">
             <DataGrid ColumnWidth="*"
-              Background="Transparent"
-              BorderThickness="0"
-              Name="Classes"
-              ItemsSource="{Binding ClassList, UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Name="Classes"
+                      ItemsSource="{Binding ClassList, UpdateSourceTrigger=PropertyChanged ,Mode=TwoWay}"
                       AutoGenerateColumns="False"
-
-              SelectedItem="{Binding ClassDTO , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
+                      SelectedItem="{Binding ClassDTO , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>

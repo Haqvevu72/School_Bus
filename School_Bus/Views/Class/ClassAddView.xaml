@@ -12,23 +12,23 @@
     <Page.DataContext>
         <viewmodel:ClassViewModel/>
     </Page.DataContext>
-    
-    <Grid Background="#F9B572">
-        
+
+    <Grid Background="LightCyan">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
-            <Button         x:Name="btnClose"
-                            Style="{StaticResource controlButton}"
-                            Tag="{StaticResource color4}"
-                            Click="btnClose_Click"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Margin="20"
-                            >
-                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
-            </Button>
+        <Button   x:Name="btnClose"
+                  Style="{StaticResource controlButton}"
+                  Tag="{StaticResource color4}"
+                  Click="btnClose_Click"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Margin="20">
+            
+            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+        </Button>
 
         <StackPanel Grid.Row="1">
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
@@ -36,12 +36,12 @@
                        Foreground="Brown"
                        Margin="20 0 0 0"
                        FontWeight="Bold"></TextBlock>
-            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="Coral"
+            
+            <TextBox Style="{StaticResource MaterialDesignTextBox}" Foreground="Coral"
                      FontSize="18"
                      Width="360"
                      HorizontalAlignment="Left"
                      Margin="20 0 0 0"
-                     Background="LightYellow"
                      FontWeight="Bold"
                      Text="{Binding ClassName}"></TextBox>
             <Button 

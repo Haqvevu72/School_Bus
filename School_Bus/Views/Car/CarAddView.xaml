@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <viewmodel:CarViewModel/>
     </UserControl.DataContext>
-    <Grid Background="#F9B572">
+    <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
@@ -32,12 +32,12 @@
                 Height="370">
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                    Text="Driver Id"
                    FontSize="20"
                    Margin="0 0 120 0"
                    HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
+            <TextBox   Style="{DynamicResource MaterialDesignTextBox}"
                    Width="200"
                    HorizontalAlignment="Center"
                    Margin="0 5 0 0"
@@ -47,12 +47,12 @@
                    Text="{Binding DriverId}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                   Text="Capacity"
+                       Foreground="Brown"
+                       Text="Capacity"
                    FontSize="20"
                    Margin="0 0 120 0"
                    HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
+            <TextBox   Style="{DynamicResource MaterialDesignTextBox}"
                    Width="200"
                    HorizontalAlignment="Center"
                    Margin="0 5 0 0"
@@ -62,12 +62,12 @@
                    Text="{Binding Capacity}"></TextBox>
 
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Foreground="Brown"
                    Text="Number"
                    FontSize="20"
                    Margin="0 0 120 0"
                    HorizontalAlignment="Center"></TextBlock>
-            <TextBox   Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                   Background="LightYellow"
+            <TextBox   Style="{DynamicResource MaterialDesignTextBox}"
                    Width="200"
                    HorizontalAlignment="Center"
                    Margin="0 5 0 0"

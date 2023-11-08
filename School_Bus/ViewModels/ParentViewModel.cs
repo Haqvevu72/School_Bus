@@ -133,8 +133,8 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
 
-            ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
-            IdList = IdList = new List<int>(repository.GetParentId());
+            //ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
+            //IdList = IdList = new List<int>(repository.GetParentId());
         }
 
         public void ExecuteShowRemoveParentViewCommand(object? parameter)
