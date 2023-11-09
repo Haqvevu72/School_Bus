@@ -24,6 +24,7 @@ namespace School_Bus.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
 
 
         private string id;
@@ -146,6 +147,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
+            RefreshCommand = new ViewModelCommand(ExecuteRefreshCommand);
 
             ParentList = new ObservableCollection<ParentDTO>(repository.Parents());
             IdList = IdList = new List<int>(repository.GetParentId());
@@ -250,5 +252,14 @@ namespace School_Bus.ViewModels
             repository.SaveChanges();
         }
 
+        public void ExecuteRefreshCommand(object parameter)
+        {
+            ParentList.Clear();
+            ObservableCollection<ParentDTO> Temp = new ObservableCollection<ParentDTO>(repository.Parents());
+            for (int i = 0; i < Temp.Count; i++)
+            {
+                ParentList.Add(Temp[i]);
+            }
+        }
     }
 }

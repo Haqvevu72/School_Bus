@@ -23,6 +23,7 @@ namespace School_Bus.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
 
         private string id;
 
@@ -144,6 +145,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
+            RefreshCommand = new ViewModelCommand();
 
             IdList = new List<int>(repository.GetDriverId());
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
@@ -246,6 +248,16 @@ namespace School_Bus.ViewModels
             Driver update = repository.GetById(DriverDTO.Id);
             repository.Update(update);
             repository.SaveChanges();
+        }
+
+        public void ExecuteRefreshCommand(object parameter)
+        {
+            DriverList.Clear();
+            ObservableCollection<DriverDTO> Temp = new ObservableCollection<DriverDTO>(repository.Drivers());
+            for (int i = 0; i < Temp.Count; i++)
+            {
+                DriverList.Add(Temp[i]);
+            }
         }
     }
 }

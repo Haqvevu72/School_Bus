@@ -23,6 +23,7 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top"
