@@ -163,7 +163,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
-            RefreshCommand = new ViewModelCommand();
+            RefreshCommand = new ViewModelCommand(ExecuteRefreshCommand);
 
             StudentList = new ObservableCollection<StudentDTO>(repository.Students());
             IdList = new List<int>(repository.GetStudentId());

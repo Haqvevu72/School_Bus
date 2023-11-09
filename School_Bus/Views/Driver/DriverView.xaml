@@ -23,6 +23,7 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Top"
@@ -62,6 +63,11 @@
                 Style="{StaticResource parentButton}">
             </Button>
 
+            <Button Grid.Column="4"
+                    Content="Refresh"
+                    Command="{Binding RefreshCommand}"
+                    Style="{StaticResource parentButton}">
+            </Button>
         </Grid>
         <Border Grid.Row="1"
             Background="LightYellow"

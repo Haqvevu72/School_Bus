@@ -145,7 +145,7 @@ namespace School_Bus.ViewModels
             FindCommand = new ViewModelCommand(ExecuteFindCommand);
             RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand);
-            RefreshCommand = new ViewModelCommand();
+            RefreshCommand = new ViewModelCommand(ExecuteRefreshCommand);
 
             IdList = new List<int>(repository.GetDriverId());
             DriverList = new ObservableCollection<DriverDTO>(repository.Drivers());
