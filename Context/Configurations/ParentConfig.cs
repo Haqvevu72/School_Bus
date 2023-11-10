@@ -25,9 +25,9 @@ namespace Context.Configurations
 
             // Constraints
 
-                builder.Property(p => p.Phone)
-                       .IsRequired()
-                       .HasMaxLength(10)
+            builder.Property(p => p.Phone)
+                   .IsRequired()
+                   .HasMaxLength(10);
 
         }
     }

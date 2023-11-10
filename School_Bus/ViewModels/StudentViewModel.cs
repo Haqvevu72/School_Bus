@@ -226,40 +226,67 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                StudentList.Clear();
-                StudentList.Add(new StudentDTO() { Id = result.Id, Firstname=result.FirstName , Lastname=result.LastName,ParentId=result.ParentId,ClassId = result.ClassId ,BusId = result.BusId});
+                if (result != null)
+                {
+                    StudentList.Clear();
+                    StudentList.Add(new StudentDTO() { Id = result.Id, Firstname = result.FirstName, Lastname = result.LastName, ParentId = result.ParentId, ClassId = result.ClassId, BusId = result.BusId });
+                }
+                else
+                    MessageBox.Show("Student not found", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
             }
+            else
+                MessageBox.Show("Please mention Id", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteAddCommand(object parameter)
         {
-            Student new_class = new Student() { FirstName = FirstName, LastName = LastName, ClassId = ClassId , ParentId = ParentId , BusId = BusId };
+            if (FirstName != null && LastName != null && ClassId != null && ParentId != null && BusId != null)
+            {
+                Student new_class = new Student() { FirstName = FirstName, LastName = LastName, ClassId = ClassId, ParentId = ParentId, BusId = BusId };
 
-            repository.Add(new_class);
-            repository.SaveChanges();
+                repository.Add(new_class);
+                repository.SaveChanges();
 
-            StudentList.Add(new StudentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, ParentId = new_class.ParentId, ClassId = new_class.ClassId, BusId = new_class.BusId });
+                StudentList.Add(new StudentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, ParentId = new_class.ParentId, ClassId = new_class.ClassId, BusId = new_class.BusId });
 
-            inputwindow.Close();
+                inputwindow.Close();
+            }
+            else
+                MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Student current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
-
-            FirstName = current.FirstName;
-            LastName = current.LastName;
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
+                if (current != null)
+                {
+                    FirstName = current.FirstName;
+                    LastName = current.LastName;
+                }
+                else
+                    MessageBox.Show("Student not found", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Please pick an Id", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetStudentId());
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetStudentId());
 
-            FirstName =null;
-            LastName = null;
+                FirstName = null;
+                LastName = null;
+            }
+            else
+                MessageBox.Show("Can not remove!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         public void ExecuteUpdateCommand(object parameter)
         {
@@ -270,12 +297,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRefreshCommand(object parameter)
         {
-            StudentList.Clear();
             ObservableCollection<StudentDTO> Temp = new ObservableCollection<StudentDTO>(repository.Students());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                StudentList.Add(Temp[i]);
+                StudentList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    StudentList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

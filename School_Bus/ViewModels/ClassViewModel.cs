@@ -167,9 +167,11 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                if(result!=null)
+                if (result != null)
+                {
                     ClassList.Clear();
                     ClassList.Add(new ClassDTO() { Id = result.Id, Name = result.Name });
+                }
                 else
                     MessageBox.Show("Class not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }

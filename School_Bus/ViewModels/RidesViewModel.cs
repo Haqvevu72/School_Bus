@@ -14,16 +14,16 @@ using System.Diagnostics;
 
 namespace School_Bus.ViewModels
 {
-    public class RidesViewModel:BaseViewModel
+    public class RidesViewModel : BaseViewModel
     {
-        
+
         public static Window outputWindow;
 
         Repository<Ride> repository = new Repository<Ride>();
         public ICommand ShowRemoveRidesViewCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand FindCommand { get; set; }
-        public ICommand AddCommand { get; set; }    
+        public ICommand AddCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
@@ -131,9 +131,9 @@ namespace School_Bus.ViewModels
         public RideDTO RideDTO
         {
             get { return rideDTO; }
-            set 
-            { 
-                rideDTO = value; 
+            set
+            {
+                rideDTO = value;
                 OnPropertyChanged(nameof(RideDTO));
             }
         }
@@ -184,43 +184,69 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                RideList.Clear();
-                RideList.Add(new RideDTO() { Id = result.Id, BusId = result.BusId , StartPoint = result.StartPoint , EndPoint = result.EndPoint , Passengers = result.Passengers});
+                if (result != null)
+                {
+                    RideList.Clear();
+                    RideList.Add(new RideDTO() { Id = result.Id, BusId = result.BusId, StartPoint = result.StartPoint, EndPoint = result.EndPoint, Passengers = result.Passengers });
+                }
+                else
+                    MessageBox.Show("Rides not found", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+                MessageBox.Show("Please mention Id", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Ride current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
-
-            StartPoint = current.StartPoint;
-            EndPoint = current.EndPoint;
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
+                if (current != null)
+                {
+                    StartPoint = current.StartPoint;
+                    EndPoint = current.EndPoint;
+                }
+                else
+                    MessageBox.Show("Rides not found", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Pick an Id", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetRideId());
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetRideId());
 
-            StartPoint = null;
-            EndPoint = null;
+                StartPoint = null;
+                EndPoint = null;
+            }
+            else
+                MessageBox.Show("Choose Ride !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-        public void ExecuteAddCommand(object parameter) 
+        public void ExecuteAddCommand(object parameter)
         {
             try
             {
-                Ride new_ride = new Ride() { BusId = Convert.ToInt32(BusId), StartPoint = StartPoint, EndPoint = EndPoint, Passengers = Convert.ToInt32(Passengers) };
+                if (BusId != null && StartPoint != null && EndPoint != null && Passengers != null)
+                {
+                    Ride new_ride = new Ride() { BusId = Convert.ToInt32(BusId), StartPoint = StartPoint, EndPoint = EndPoint, Passengers = Convert.ToInt32(Passengers) };
 
-                repository.Add(new_ride);
-                repository.SaveChanges();
+                    repository.Add(new_ride);
+                    repository.SaveChanges();
+                }
+                else
+                    MessageBox.Show("Please mention all things", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Can not add duplicate value", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            finally 
+            finally
             {
                 BusId = null;
                 StartPoint = null;
@@ -237,12 +263,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRefreshCommand(object parameter)
         {
-            RideList.Clear();
             ObservableCollection<RideDTO> Temp = new ObservableCollection<RideDTO>(repository.Rides());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                RideList.Add(Temp[i]);
+                RideList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    RideList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

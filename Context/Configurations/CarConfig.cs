@@ -34,8 +34,8 @@ namespace Context.Configurations
 
             // Constraint
 
-            builder.HasIndex(x => x.Number)
-                    .IsUnique();
+            builder.Property(c => c.Number)
+                   .HasMaxLength(9);
 
 
 

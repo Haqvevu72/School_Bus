@@ -208,8 +208,10 @@ namespace School_Bus.ViewModels
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
                 if(result!=null)
+                {
                     DriverList.Clear();
                     DriverList.Add(new DriverDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Address = result.Address , Phone = result.Phone });
+                }
                 else
                     MessageBox.Show("Driver not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -219,17 +221,28 @@ namespace School_Bus.ViewModels
 
         public void ExecuteAddCommand(object parameter)
         {
-            if (FirstName != null && LastName != null && Phone != null && Address != null)
+            try
             {
-                Driver new_class = new Driver() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
+                if (FirstName != null && LastName != null && Phone != null && Address != null)
+                {
+                    Driver new_class = new Driver() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
 
-                repository.Add(new_class);
-                repository.SaveChanges();
+                    repository.Add(new_class);
+                    repository.SaveChanges();
 
+                    inputwindow.Close();
+                }
+                else
+                    MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally 
+            {
                 inputwindow.Close();
             }
-            else
-                MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Driver current;
@@ -252,12 +265,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetRideId());
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetRideId());
 
-            FirstName = null;
-            LastName = null;
+                FirstName = null;
+                LastName = null;
+            }
+            else
+                MessageBox.Show("Please choose Driver", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteUpdateCommand(object parameter)

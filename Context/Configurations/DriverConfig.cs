@@ -43,7 +43,7 @@ namespace Context.Configurations
 
             builder.Property(d => d.Phone)
                    .IsRequired()
-                   .HasMaxLength(10)
+                   .HasMaxLength(10);
 
         }
     }

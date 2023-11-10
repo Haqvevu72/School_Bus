@@ -224,19 +224,30 @@ namespace School_Bus.ViewModels
 
         public void ExecuteAddCommand(object parameter)
         {
-            if (FirstName != null && LastName != null && Phone != null && Address != null)
+            try
             {
-                Parent new_class = new Parent() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
+                if (FirstName != null && LastName != null && Phone != null && Address != null)
+                {
+                    Parent new_class = new Parent() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
 
-                repository.Add(new_class);
-                repository.SaveChanges();
+                    repository.Add(new_class);
+                    repository.SaveChanges();
 
-                ParentList.Add(new ParentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, Address = new_class.Address, Phone = new_class.Phone });
+                    ParentList.Add(new ParentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, Address = new_class.Address, Phone = new_class.Phone });
 
+                    inputwindow.Close();
+                }
+                else
+                    MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally 
+            {
                 inputwindow.Close();
             }
-            else
-                MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Parent current;
@@ -259,12 +270,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetParentId());
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetParentId());
 
-            FirstName = null;
-            LastName = null;
+                FirstName = null;
+                LastName = null;
+            }
+            else
+                MessageBox.Show("Please choose Parent", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         public void ExecuteUpdateCommand(object parameter)
         {

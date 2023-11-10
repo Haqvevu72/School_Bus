@@ -252,10 +252,15 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetCarId());
-            Number = null;
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetCarId());
+                Number = null;
+            }
+            else
+                MessageBox.Show("Please choose Car", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteUpdateCommand(object parameter)
