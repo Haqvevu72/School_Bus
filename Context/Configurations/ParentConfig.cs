@@ -10,7 +10,7 @@ namespace Context.Configurations
         {
             // Has Data
 
-            builder.HasData(
+                builder.HasData(
                     new Parent() { Id = 1, FirstName = "Ali", LastName = "Muradov", Phone = "0555555555", Address = "Sumqayit City", Created = DateTime.Now, Updated = DateTime.Now },
                     new Parent() { Id = 2, FirstName = "Ayse", LastName = "Kara", Phone = "0555123456", Address = "Istanbul", Created = DateTime.Now, Updated = DateTime.Now },
                     new Parent() { Id = 3, FirstName = "David", LastName = "Brown", Phone = "0555234567", Address = "New York", Created = DateTime.Now, Updated = DateTime.Now },
@@ -22,6 +22,12 @@ namespace Context.Configurations
                     new Parent() { Id = 9, FirstName = "Lucas", LastName = "Miller", Phone = "0555890123", Address = "Boston", Created = DateTime.Now, Updated = DateTime.Now },
                     new Parent() { Id = 10, FirstName = "Ava", LastName = "Clark", Phone = "0555101234", Address = "Houston", Created = DateTime.Now, Updated = DateTime.Now }
                     );
+
+            // Constraints
+
+                builder.Property(p => p.Phone)
+                       .IsRequired()
+                       .HasMaxLength(10)
 
         }
     }

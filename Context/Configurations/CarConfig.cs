@@ -34,8 +34,7 @@ namespace Context.Configurations
 
             // Constraint
 
-            builder
-                    .HasIndex(x => x.Number)
+            builder.HasIndex(x => x.Number)
                     .IsUnique();
 
 

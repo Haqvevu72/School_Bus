@@ -210,30 +210,51 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                ParentList.Clear();
-                ParentList.Add(new ParentDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Phone = result.Phone , Address = result.Address });
+                if (result != null)
+                {
+                    ParentList.Clear();
+                    ParentList.Add(new ParentDTO() { Id = result.Id, Firstname = result.FirstName, Lastname = result.LastName, Phone = result.Phone, Address = result.Address });
+                }
+                else
+                    MessageBox.Show("Parent not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+                MessageBox.Show("Please mention Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteAddCommand(object parameter)
         {
-            Parent new_class = new Parent() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
+            if (FirstName != null && LastName != null && Phone != null && Address != null)
+            {
+                Parent new_class = new Parent() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
 
-            repository.Add(new_class);
-            repository.SaveChanges();
+                repository.Add(new_class);
+                repository.SaveChanges();
 
-            ParentList.Add(new ParentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, Address = new_class.Address, Phone = new_class.Phone });
+                ParentList.Add(new ParentDTO() { Id = new_class.Id, Firstname = new_class.FirstName, Lastname = new_class.LastName, Address = new_class.Address, Phone = new_class.Phone });
 
-            inputwindow.Close();
+                inputwindow.Close();
+            }
+            else
+                MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Parent current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
-
-            FirstName = current.FirstName;
-            LastName = current.LastName;
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
+                if (current != null)
+                {
+                    FirstName = current.FirstName;
+                    LastName = current.LastName;
+                }
+                else
+                    MessageBox.Show("Parent not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Please pick an Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
@@ -254,12 +275,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRefreshCommand(object parameter)
         {
-            ParentList.Clear();
             ObservableCollection<ParentDTO> Temp = new ObservableCollection<ParentDTO>(repository.Parents());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                ParentList.Add(Temp[i]);
+                ParentList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    ParentList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

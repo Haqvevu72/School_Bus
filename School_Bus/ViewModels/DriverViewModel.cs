@@ -207,30 +207,47 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                DriverList.Clear();
-                DriverList.Add(new DriverDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Address = result.Address , Phone = result.Phone });
+                if(result!=null)
+                    DriverList.Clear();
+                    DriverList.Add(new DriverDTO() { Id = result.Id, Firstname = result.FirstName , Lastname = result.LastName , Address = result.Address , Phone = result.Phone });
+                else
+                    MessageBox.Show("Driver not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+                MessageBox.Show("Please mention Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteAddCommand(object parameter)
         {
-            Driver new_class = new Driver() { FirstName = FirstName, LastName = LastName , Phone = Phone , Address = Address };
+            if (FirstName != null && LastName != null && Phone != null && Address != null)
+            {
+                Driver new_class = new Driver() { FirstName = FirstName, LastName = LastName, Phone = Phone, Address = Address };
 
-            repository.Add(new_class);
-            repository.SaveChanges();
+                repository.Add(new_class);
+                repository.SaveChanges();
 
-            DriverList.Add(new DriverDTO() { Id = new_class.Id,  Firstname = new_class.FirstName, Lastname = new_class.LastName , Address = new_class.Address , Phone=new_class.Phone });
-
-            inputwindow.Close();
+                inputwindow.Close();
+            }
+            else
+                MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private Driver current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
-
-            FirstName = current.FirstName;
-            LastName = current.LastName;
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
+                if (current != null)
+                {
+                    FirstName = current.FirstName;
+                    LastName = current.LastName;
+                }
+                else
+                    MessageBox.Show("Driver not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Please pick an Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
@@ -252,12 +269,17 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRefreshCommand(object parameter)
         {
-            DriverList.Clear();
             ObservableCollection<DriverDTO> Temp = new ObservableCollection<DriverDTO>(repository.Drivers());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                DriverList.Add(Temp[i]);
+                DriverList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    DriverList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

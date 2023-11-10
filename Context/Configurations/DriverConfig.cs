@@ -39,7 +39,11 @@ namespace Context.Configurations
                 );
 
 
+            // Constraints
 
+            builder.Property(d => d.Phone)
+                   .IsRequired()
+                   .HasMaxLength(10)
 
         }
     }

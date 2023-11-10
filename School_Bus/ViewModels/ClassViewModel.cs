@@ -167,42 +167,65 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                ClassList.Clear();
-                ClassList.Add(new ClassDTO() { Id = result.Id, Name = result.Name });
+                if(result!=null)
+                    ClassList.Clear();
+                    ClassList.Add(new ClassDTO() { Id = result.Id, Name = result.Name });
+                else
+                    MessageBox.Show("Class not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else 
+            { 
+                MessageBox.Show("Please mention Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); 
             }
         }
 
         public void ExecuteAddCommand(object parameter)
         {
 
-            Class new_class = new Class() { Name = ClassName };
+            if (ClassName != null)
+            {
+                Class new_class = new Class() { Name = ClassName };
 
-            repository.Add(new_class);
-            repository.SaveChanges();
+                repository.Add(new_class);
+                repository.SaveChanges();
 
-            
-            ClassList.Add(new ClassDTO() { Id = new_class.Id, Name = new_class.Name });
-
-            inputWindow.Close();
+                inputWindow.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please write class name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
         }
 
         private Class current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
 
-            ClassName = current.Name;
+                if (current != null)
+                    ClassName = current.Name;
+                else
+                    MessageBox.Show("Class not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Please pick an Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
         {
-            repository.Delete(current);
-            repository.SaveChanges();
-            IdList = new List<int>(repository.GetClassId());
+            if (current != null)
+            {
+                repository.Delete(current);
+                repository.SaveChanges();
+                IdList = new List<int>(repository.GetClassId());
 
-            ClassName = null;
-
+                ClassName = null;
+            }
+            else
+                MessageBox.Show("Class not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         public void ExecuteUpdateCommand(object parameter)
         { 
@@ -213,12 +236,18 @@ namespace School_Bus.ViewModels
 
         public void ExecuteRefreshCommand(object parameter) 
         {
-            ClassList.Clear();
             ObservableCollection<ClassDTO> Temp = new ObservableCollection<ClassDTO>(repository.Classes());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                ClassList.Add(Temp[i]);
+                ClassList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    ClassList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
         }
     }
 }

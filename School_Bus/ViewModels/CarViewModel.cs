@@ -197,8 +197,17 @@ namespace School_Bus.ViewModels
             if (string.IsNullOrEmpty(Id) == false)
             {
                 var result = repository.GetById(Convert.ToInt32(Id));
-                CarList.Clear();
-                CarList.Add(new CarDTO() { Id = result.Id, DriverId = result.DriverId , Capacity = result.Capacity , Number = result.Number });
+                if (result != null)
+                {
+                    CarList.Clear();
+                    CarList.Add(new CarDTO() { Id = result.Id, DriverId = result.DriverId, Capacity = result.Capacity, Number = result.Number });
+                }
+                else
+                    MessageBox.Show("Car not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Please mention Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -207,12 +216,16 @@ namespace School_Bus.ViewModels
         {
             try
             {
-                Car new_class = new Car() { DriverId = DriverId, Capacity = Capacity, Number = Number };
+                if (DriverId != null && Capacity != null & Number != null)
+                {
+                    Car new_class = new Car() { DriverId = DriverId, Capacity = Capacity, Number = Number };
 
-                repository.Add(new_class);
-                repository.SaveChanges();
-                CarList.Add(new CarDTO() { Id = new_class.Id, DriverId = new_class.DriverId, Capacity = new_class.Capacity, Number = new_class.Number });
-
+                    repository.Add(new_class);
+                    repository.SaveChanges();
+                    CarList.Add(new CarDTO() { Id = new_class.Id, DriverId = new_class.DriverId, Capacity = new_class.Capacity, Number = new_class.Number });
+                }
+                else
+                    MessageBox.Show("Please mention all things !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
             catch (Exception ex)
@@ -225,8 +238,16 @@ namespace School_Bus.ViewModels
         private Car current;
         public void ExecuteFindCommand(object parameter)
         {
-            current = repository.GetById(Convert.ToInt32(Id));
-            Number = current.Number;
+            if (Id != null)
+            {
+                current = repository.GetById(Convert.ToInt32(Id));
+                if (current != null)
+                    Number = current.Number;
+                else
+                    MessageBox.Show("Car not found !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+                MessageBox.Show("Please pick an Id !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ExecuteRemoveCommand(object parameter)
@@ -245,12 +266,17 @@ namespace School_Bus.ViewModels
         }
         public void ExecuteRefreshCommand(object parameter)
         {
-            CarList.Clear();
             ObservableCollection<CarDTO> Temp = new ObservableCollection<CarDTO>(repository.Cars());
-            for (int i = 0; i < Temp.Count; i++)
+            if (Temp != null)
             {
-                CarList.Add(Temp[i]);
+                CarList.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    CarList.Add(Temp[i]);
+                }
             }
+            else
+                MessageBox.Show("Can not refresh !", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }
